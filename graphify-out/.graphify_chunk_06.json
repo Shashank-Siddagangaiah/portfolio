@@ -1,0 +1,698 @@
+{
+  "nodes": [
+    {
+      "id": "schema_image_user_event_detail",
+      "label": "awm.dbo.user_event_detail",
+      "file_type": "image",
+      "source_file": "Online_accounts_report/schema_image.png",
+      "source_location": "SQL query 1 / results panel",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "schema_image_party_user_account_link",
+      "label": "awm.dbo.party_user_account_link",
+      "file_type": "image",
+      "source_file": "Online_accounts_report/schema_image.png",
+      "source_location": "SQL query 2 / results panel",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "schema_image_online_party",
+      "label": "awm.dbo.online_party",
+      "file_type": "image",
+      "source_file": "Online_accounts_report/schema_image.png",
+      "source_location": "SQL query 3 / results panel",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "schema_image_agent_party_link",
+      "label": "awm.dbo.agent_party_link",
+      "file_type": "image",
+      "source_file": "Online_accounts_report/schema_image.png",
+      "source_location": "SQL query 4",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "schema_image_party",
+      "label": "awm.dbo.party",
+      "file_type": "image",
+      "source_file": "Online_accounts_report/schema_image.png",
+      "source_location": "results panel row 4",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "schema_image_col_party_user_account_link_id",
+      "label": "Column: party_user_account_link_id",
+      "file_type": "image",
+      "source_file": "Online_accounts_report/schema_image.png",
+      "source_location": "party_user_account_link result set",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "schema_image_col_user_account_anchor_id",
+      "label": "Column: user_account_anchor_id",
+      "file_type": "image",
+      "source_file": "Online_accounts_report/schema_image.png",
+      "source_location": "party_user_account_link result set",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "schema_image_col_party_anchor_id",
+      "label": "Column: party_anchor_id",
+      "file_type": "image",
+      "source_file": "Online_accounts_report/schema_image.png",
+      "source_location": "party_user_account_link / online_party / agent_party_link",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "schema_image_col_event_type",
+      "label": "Column: event_type",
+      "file_type": "image",
+      "source_file": "Online_accounts_report/schema_image.png",
+      "source_location": "user_event_detail result set",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "schema_image_col_event_date",
+      "label": "Column: event_date",
+      "file_type": "image",
+      "source_file": "Online_accounts_report/schema_image.png",
+      "source_location": "user_event_detail result set",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "schema_image_col_account_creation_completed_car",
+      "label": "Column: account_creation_completed_car",
+      "file_type": "image",
+      "source_file": "Online_accounts_report/schema_image.png",
+      "source_location": "user_event_detail result set",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "schema_image_col_account_car_full_name",
+      "label": "Column: account_car_full_name",
+      "file_type": "image",
+      "source_file": "Online_accounts_report/schema_image.png",
+      "source_location": "user_event_detail result set",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "schema_image_col_record_source",
+      "label": "Column: record_source",
+      "file_type": "image",
+      "source_file": "Online_accounts_report/schema_image.png",
+      "source_location": "party_user_account_link result set",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "schema_image_col_load_date",
+      "label": "Column: load_date",
+      "file_type": "image",
+      "source_file": "Online_accounts_report/schema_image.png",
+      "source_location": "party_user_account_link result set",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "schema_image_col_online_party_id",
+      "label": "Column: online_party_id",
+      "file_type": "image",
+      "source_file": "Online_accounts_report/schema_image.png",
+      "source_location": "online_party result set",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "schema_image_col_policy_cache_id",
+      "label": "Column: policy_cache_id",
+      "file_type": "image",
+      "source_file": "Online_accounts_report/schema_image.png",
+      "source_location": "online_party result set",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "schema_image_col_velocity_cache_client_id",
+      "label": "Column: velocity_cache_client_id",
+      "file_type": "image",
+      "source_file": "Online_accounts_report/schema_image.png",
+      "source_location": "online_party result set",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "schema_image_col_first_name",
+      "label": "Column: first_name",
+      "file_type": "image",
+      "source_file": "Online_accounts_report/schema_image.png",
+      "source_location": "online_party result set",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "schema_image_col_last_name",
+      "label": "Column: last_name",
+      "file_type": "image",
+      "source_file": "Online_accounts_report/schema_image.png",
+      "source_location": "online_party result set",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "schema_image_col_gender_id",
+      "label": "Column: gender_id",
+      "file_type": "image",
+      "source_file": "Online_accounts_report/schema_image.png",
+      "source_location": "online_party result set",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "schema_image_col_birth_date",
+      "label": "Column: birth_date",
+      "file_type": "image",
+      "source_file": "Online_accounts_report/schema_image.png",
+      "source_location": "online_party result set",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "schema_image_col_occupation_type_id",
+      "label": "Column: occupation_type_id",
+      "file_type": "image",
+      "source_file": "Online_accounts_report/schema_image.png",
+      "source_location": "online_party / party result set",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "schema_image_col_insurance_support_type_id",
+      "label": "Column: insurance_support_type_id",
+      "file_type": "image",
+      "source_file": "Online_accounts_report/schema_image.png",
+      "source_location": "party result set",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "schema_image_col_legal_entity_type_id",
+      "label": "Column: legal_entity_type_id",
+      "file_type": "image",
+      "source_file": "Online_accounts_report/schema_image.png",
+      "source_location": "party result set",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "schema_image_col_party_status_id",
+      "label": "Column: party_status_id",
+      "file_type": "image",
+      "source_file": "Online_accounts_report/schema_image.png",
+      "source_location": "party result set",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "schema_image_col_statutory_title_id",
+      "label": "Column: statutory_title_id",
+      "file_type": "image",
+      "source_file": "Online_accounts_report/schema_image.png",
+      "source_location": "party result set",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "schema_image_col_marital_status_id",
+      "label": "Column: marital_status_id",
+      "file_type": "image",
+      "source_file": "Online_accounts_report/schema_image.png",
+      "source_location": "party result set",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "schema_image_col_party_id",
+      "label": "Column: party_id",
+      "file_type": "image",
+      "source_file": "Online_accounts_report/schema_image.png",
+      "source_location": "party result set",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "schema_image_schema_awm",
+      "label": "Database Schema: awm (AWM EDW)",
+      "file_type": "image",
+      "source_file": "Online_accounts_report/schema_image.png",
+      "source_location": "SQL query window titles",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    }
+  ],
+  "edges": [
+    {
+      "source": "schema_image_party_user_account_link",
+      "target": "schema_image_user_event_detail",
+      "relation": "shares_data_with",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "Online_accounts_report/schema_image.png",
+      "source_location": "SQL query 1 WHERE party_user_account_link_id = '293706'",
+      "weight": 1.0
+    },
+    {
+      "source": "schema_image_party_user_account_link",
+      "target": "schema_image_online_party",
+      "relation": "shares_data_with",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "Online_accounts_report/schema_image.png",
+      "source_location": "SQL query 3 WHERE party_anchor_id joined via party_user_account_link",
+      "weight": 1.0
+    },
+    {
+      "source": "schema_image_party_user_account_link",
+      "target": "schema_image_agent_party_link",
+      "relation": "shares_data_with",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "Online_accounts_report/schema_image.png",
+      "source_location": "SQL query 4 WHERE party_anchor_id = '7446367'",
+      "weight": 1.0
+    },
+    {
+      "source": "schema_image_online_party",
+      "target": "schema_image_party",
+      "relation": "shares_data_with",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "Online_accounts_report/schema_image.png",
+      "source_location": "party result set visible alongside online_party via shared party_anchor_id",
+      "weight": 0.85
+    },
+    {
+      "source": "schema_image_col_party_user_account_link_id",
+      "target": "schema_image_party_user_account_link",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "Online_accounts_report/schema_image.png",
+      "source_location": "party_user_account_link result set column header",
+      "weight": 1.0
+    },
+    {
+      "source": "schema_image_col_party_user_account_link_id",
+      "target": "schema_image_user_event_detail",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "Online_accounts_report/schema_image.png",
+      "source_location": "SQL query 1 WHERE clause: party_user_account_link_id = '293706'",
+      "weight": 1.0
+    },
+    {
+      "source": "schema_image_col_user_account_anchor_id",
+      "target": "schema_image_party_user_account_link",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "Online_accounts_report/schema_image.png",
+      "source_location": "party_user_account_link result set",
+      "weight": 1.0
+    },
+    {
+      "source": "schema_image_col_party_anchor_id",
+      "target": "schema_image_party_user_account_link",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "Online_accounts_report/schema_image.png",
+      "source_location": "party_user_account_link result set column, SQL query 2 WHERE party_anchor_id = '2888268'",
+      "weight": 1.0
+    },
+    {
+      "source": "schema_image_col_party_anchor_id",
+      "target": "schema_image_online_party",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "Online_accounts_report/schema_image.png",
+      "source_location": "SQL query 3 WHERE party_anchor_id = '7446367'",
+      "weight": 1.0
+    },
+    {
+      "source": "schema_image_col_party_anchor_id",
+      "target": "schema_image_agent_party_link",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "Online_accounts_report/schema_image.png",
+      "source_location": "SQL query 4 WHERE party_anchor_id = '7446367'",
+      "weight": 1.0
+    },
+    {
+      "source": "schema_image_col_party_anchor_id",
+      "target": "schema_image_party",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "Online_accounts_report/schema_image.png",
+      "source_location": "party result set column party_anchor_id",
+      "weight": 1.0
+    },
+    {
+      "source": "schema_image_col_event_type",
+      "target": "schema_image_user_event_detail",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "Online_accounts_report/schema_image.png",
+      "source_location": "user_event_detail result set — values: Creation, Activation",
+      "weight": 1.0
+    },
+    {
+      "source": "schema_image_col_event_date",
+      "target": "schema_image_user_event_detail",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "Online_accounts_report/schema_image.png",
+      "source_location": "user_event_detail result set",
+      "weight": 1.0
+    },
+    {
+      "source": "schema_image_col_account_creation_completed_car",
+      "target": "schema_image_user_event_detail",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "Online_accounts_report/schema_image.png",
+      "source_location": "user_event_detail result set",
+      "weight": 1.0
+    },
+    {
+      "source": "schema_image_col_account_car_full_name",
+      "target": "schema_image_user_event_detail",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "Online_accounts_report/schema_image.png",
+      "source_location": "user_event_detail result set — value: KSWORL",
+      "weight": 1.0
+    },
+    {
+      "source": "schema_image_col_record_source",
+      "target": "schema_image_party_user_account_link",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "Online_accounts_report/schema_image.png",
+      "source_location": "party_user_account_link result set — value: CIF_loans",
+      "weight": 1.0
+    },
+    {
+      "source": "schema_image_col_load_date",
+      "target": "schema_image_party_user_account_link",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "Online_accounts_report/schema_image.png",
+      "source_location": "party_user_account_link result set",
+      "weight": 1.0
+    },
+    {
+      "source": "schema_image_col_online_party_id",
+      "target": "schema_image_online_party",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "Online_accounts_report/schema_image.png",
+      "source_location": "online_party result set",
+      "weight": 1.0
+    },
+    {
+      "source": "schema_image_col_policy_cache_id",
+      "target": "schema_image_online_party",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "Online_accounts_report/schema_image.png",
+      "source_location": "online_party result set",
+      "weight": 1.0
+    },
+    {
+      "source": "schema_image_col_velocity_cache_client_id",
+      "target": "schema_image_online_party",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "Online_accounts_report/schema_image.png",
+      "source_location": "online_party result set",
+      "weight": 1.0
+    },
+    {
+      "source": "schema_image_col_first_name",
+      "target": "schema_image_online_party",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "Online_accounts_report/schema_image.png",
+      "source_location": "online_party result set",
+      "weight": 1.0
+    },
+    {
+      "source": "schema_image_col_last_name",
+      "target": "schema_image_online_party",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "Online_accounts_report/schema_image.png",
+      "source_location": "online_party result set",
+      "weight": 1.0
+    },
+    {
+      "source": "schema_image_col_gender_id",
+      "target": "schema_image_online_party",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "Online_accounts_report/schema_image.png",
+      "source_location": "online_party result set",
+      "weight": 1.0
+    },
+    {
+      "source": "schema_image_col_birth_date",
+      "target": "schema_image_online_party",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "Online_accounts_report/schema_image.png",
+      "source_location": "online_party result set",
+      "weight": 1.0
+    },
+    {
+      "source": "schema_image_col_occupation_type_id",
+      "target": "schema_image_online_party",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "Online_accounts_report/schema_image.png",
+      "source_location": "online_party result set",
+      "weight": 1.0
+    },
+    {
+      "source": "schema_image_col_occupation_type_id",
+      "target": "schema_image_party",
+      "relation": "shares_data_with",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "Online_accounts_report/schema_image.png",
+      "source_location": "party result set — occupation_type_id shared with online_party",
+      "weight": 1.0
+    },
+    {
+      "source": "schema_image_col_party_id",
+      "target": "schema_image_party",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "Online_accounts_report/schema_image.png",
+      "source_location": "party result set",
+      "weight": 1.0
+    },
+    {
+      "source": "schema_image_col_insurance_support_type_id",
+      "target": "schema_image_party",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "Online_accounts_report/schema_image.png",
+      "source_location": "party result set",
+      "weight": 1.0
+    },
+    {
+      "source": "schema_image_col_legal_entity_type_id",
+      "target": "schema_image_party",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "Online_accounts_report/schema_image.png",
+      "source_location": "party result set",
+      "weight": 1.0
+    },
+    {
+      "source": "schema_image_col_party_status_id",
+      "target": "schema_image_party",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "Online_accounts_report/schema_image.png",
+      "source_location": "party result set",
+      "weight": 1.0
+    },
+    {
+      "source": "schema_image_col_statutory_title_id",
+      "target": "schema_image_party",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "Online_accounts_report/schema_image.png",
+      "source_location": "party result set",
+      "weight": 1.0
+    },
+    {
+      "source": "schema_image_col_marital_status_id",
+      "target": "schema_image_party",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "Online_accounts_report/schema_image.png",
+      "source_location": "party result set",
+      "weight": 1.0
+    },
+    {
+      "source": "schema_image_user_event_detail",
+      "target": "schema_image_schema_awm",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "Online_accounts_report/schema_image.png",
+      "source_location": "SQL: from awm.dbo.user_event_detail",
+      "weight": 1.0
+    },
+    {
+      "source": "schema_image_party_user_account_link",
+      "target": "schema_image_schema_awm",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "Online_accounts_report/schema_image.png",
+      "source_location": "SQL: from awm.dbo.party_user_account_link",
+      "weight": 1.0
+    },
+    {
+      "source": "schema_image_online_party",
+      "target": "schema_image_schema_awm",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "Online_accounts_report/schema_image.png",
+      "source_location": "SQL: from awm.dbo.online_party",
+      "weight": 1.0
+    },
+    {
+      "source": "schema_image_agent_party_link",
+      "target": "schema_image_schema_awm",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "Online_accounts_report/schema_image.png",
+      "source_location": "SQL: from awm.dbo.agent_party_link",
+      "weight": 1.0
+    },
+    {
+      "source": "schema_image_party",
+      "target": "schema_image_schema_awm",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "Online_accounts_report/schema_image.png",
+      "source_location": "party table in AWM schema (inferred from context)",
+      "weight": 1.0
+    }
+  ],
+  "hyperedges": [],
+  "input_tokens": 0,
+  "output_tokens": 0
+}

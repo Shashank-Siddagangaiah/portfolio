@@ -1,0 +1,217 @@
+{
+  "nodes": [
+    {
+      "id": "favicon_svg_file",
+      "label": "favicon.svg",
+      "file_type": "image",
+      "source_file": "git_portfolio/favicon.svg",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "favicon_icon_design",
+      "label": "Portfolio Favicon Icon Design",
+      "file_type": "image",
+      "source_file": "git_portfolio/favicon.svg",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "favicon_monogram_ss",
+      "label": "Monogram Initials 'SS'",
+      "file_type": "image",
+      "source_file": "git_portfolio/favicon.svg",
+      "source_location": "line 9-10",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "favicon_gradient_cyan_purple",
+      "label": "Cyan-to-Purple Linear Gradient (#00d4ff → #7c3aed)",
+      "file_type": "image",
+      "source_file": "git_portfolio/favicon.svg",
+      "source_location": "line 3-6",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "favicon_background_rect",
+      "label": "Rounded Dark Background Rectangle (#0a0e17, rx=20)",
+      "file_type": "image",
+      "source_file": "git_portfolio/favicon.svg",
+      "source_location": "line 8",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "favicon_visual_style_dark",
+      "label": "Dark Mode Visual Style",
+      "file_type": "image",
+      "source_file": "git_portfolio/favicon.svg",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "favicon_personal_brand",
+      "label": "Personal Brand Identity — Shashank S",
+      "file_type": "image",
+      "source_file": "git_portfolio/favicon.svg",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": "Shashank S",
+      "contributor": null
+    },
+    {
+      "id": "favicon_portfolio_site",
+      "label": "Git Portfolio Website",
+      "file_type": "document",
+      "source_file": "git_portfolio/",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": "Shashank S",
+      "contributor": null
+    }
+  ],
+  "edges": [
+    {
+      "source": "favicon_svg_file",
+      "target": "favicon_icon_design",
+      "relation": "implements",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "git_portfolio/favicon.svg",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "favicon_icon_design",
+      "target": "favicon_monogram_ss",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "git_portfolio/favicon.svg",
+      "source_location": "line 9-10",
+      "weight": 1.0
+    },
+    {
+      "source": "favicon_icon_design",
+      "target": "favicon_gradient_cyan_purple",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "git_portfolio/favicon.svg",
+      "source_location": "line 3-6",
+      "weight": 1.0
+    },
+    {
+      "source": "favicon_icon_design",
+      "target": "favicon_background_rect",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "git_portfolio/favicon.svg",
+      "source_location": "line 8",
+      "weight": 1.0
+    },
+    {
+      "source": "favicon_monogram_ss",
+      "target": "favicon_gradient_cyan_purple",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "git_portfolio/favicon.svg",
+      "source_location": "line 9-10",
+      "weight": 1.0
+    },
+    {
+      "source": "favicon_background_rect",
+      "target": "favicon_visual_style_dark",
+      "relation": "rationale_for",
+      "confidence": "INFERRED",
+      "confidence_score": 0.9,
+      "source_file": "git_portfolio/favicon.svg",
+      "source_location": "line 8",
+      "weight": 0.9
+    },
+    {
+      "source": "favicon_gradient_cyan_purple",
+      "target": "favicon_visual_style_dark",
+      "relation": "rationale_for",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "git_portfolio/favicon.svg",
+      "source_location": "line 3-6",
+      "weight": 0.85
+    },
+    {
+      "source": "favicon_monogram_ss",
+      "target": "favicon_personal_brand",
+      "relation": "rationale_for",
+      "confidence": "INFERRED",
+      "confidence_score": 0.9,
+      "source_file": "git_portfolio/favicon.svg",
+      "source_location": "line 9-10",
+      "weight": 0.9
+    },
+    {
+      "source": "favicon_icon_design",
+      "target": "favicon_personal_brand",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "git_portfolio/favicon.svg",
+      "source_location": null,
+      "weight": 0.85
+    },
+    {
+      "source": "favicon_svg_file",
+      "target": "favicon_portfolio_site",
+      "relation": "references",
+      "confidence": "INFERRED",
+      "confidence_score": 0.9,
+      "source_file": "git_portfolio/favicon.svg",
+      "source_location": null,
+      "weight": 0.9
+    },
+    {
+      "source": "favicon_personal_brand",
+      "target": "favicon_portfolio_site",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "git_portfolio/favicon.svg",
+      "source_location": null,
+      "weight": 0.8
+    },
+    {
+      "source": "favicon_visual_style_dark",
+      "target": "favicon_portfolio_site",
+      "relation": "rationale_for",
+      "confidence": "AMBIGUOUS",
+      "confidence_score": 0.65,
+      "source_file": "git_portfolio/favicon.svg",
+      "source_location": null,
+      "weight": 0.65
+    }
+  ],
+  "hyperedges": [],
+  "input_tokens": 0,
+  "output_tokens": 0
+}
