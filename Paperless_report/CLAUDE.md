@@ -22,16 +22,6 @@
 
 ---
 
-## Data Sources
-
-| System | Role | Trust |
-|---|---|---|
-| EDW (`DWM.EDW.*`) | Primary source of truth | Highest |
-| AWM (`AWM.dbo.*`) | Operational — CIF indicators, email, account links | High |
-| BIM / Eloqua | Legacy — fallback email only (464 policies) | Low |
-
----
-
 ## Pipeline Architecture
 
 10 temp tables in sequence. Every downstream step depends on the one above.
@@ -150,11 +140,9 @@ ON bim.policy_number = src.policy_number   -- POL_KEY already matches EDW format
 
 ## SQL Standards
 
-- Default: **temp tables** for this pipeline — each step is independently executable and debuggable.
-- Dedup **early** — before joins, not after. See CLAUDE_reference.md checklist.
-- No `SELECT *` in production. No correlated subqueries.
-- Always `ROW_NUMBER()` for dedup (never RANK/DENSE_RANK).
-- CIF vs BIM 500+ day divergence is **structural** — bidirectional, not a timing issue.
+Generic rules (dedup, no SELECT *, ROW_NUMBER, date boundaries) are in root `CLAUDE.md` and `CLAUDE_reference.md`.
+
+**Pipeline-specific:** Default to **temp tables** here — each step must be independently executable and debuggable. CIF vs BIM 500+ day divergence is **structural** — bidirectional, not a timing issue.
 
 ---
 
@@ -196,10 +184,3 @@ ON bim.policy_number = src.policy_number   -- POL_KEY already matches EDW format
 | CIF vs BIM mismatch large | Structural — 500+ day divergence, bidirectional. Not a bug. |
 | Counts too low | `is_up_and_running_indicator` — must be 255, not 1 |
 
----
-
-## Tooling
-
-- **SQL Server** — primary query environment
-- **Tableau** — visualization
-- **Databricks** — future pipeline work

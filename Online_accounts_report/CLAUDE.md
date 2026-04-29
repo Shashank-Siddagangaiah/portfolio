@@ -21,51 +21,14 @@
 
 ---
 
-## Data Sources
+## CSR vs CSS Classification
 
-| System | Role | Trust |
-|---|---|---|
-| EDW (`DWM.EDW.*`) | Primary source of truth | Highest |
-| AWM (`AWM.dbo.*`) | Operational system | High |
-| BIM (`BIM_Reporting_Weekly.*`) | Legacy — validation only | Low |
+Project-specific to the Self Service report. Shared AWM/EDW patterns (is_up_and_running, party bridge, inforce filter) are in root `CLAUDE.md`.
 
-- All rewrites and new queries use EDW/AWM.
-- When counts differ vs BIM: investigate root cause — higher is not automatically correct.
-- Never guess the source of truth — ask if ambiguous.
-
----
-
-## AWM Architecture — Critical Facts
-
-These facts are non-obvious and have each caused major debugging sessions:
-
-**1. Active account indicator**
-```sql
-WHERE is_up_and_running_indicator = 255   -- tinyint all-bits-set; NOT 1
-```
-
-**2. AWM → EDW party bridge**
-```sql
--- party_user_account_link.party_anchor_id  = AWM DUPLICATE anchor
--- party_id_same_as_link maps it to the EDW MASTER party_key
-INNER JOIN AWM.dbo.party_id_same_as_link pil
-    ON pil.party_anchor_id_duplicate = pual.party_anchor_id
--- then join EDW via pil.party_anchor_id_master = vph.party_key
-```
-
-**3. CSR vs CSS classification (Self Service report)**
-- `account_creation_completed_csr` IS NOT NULL and NOT LIKE `'ECOMM1%'` → CSR (agent/rep enrolled)
-- NULL or `ECOMM1%` → Customer Self Service (web self-enrollment)
+- `account_creation_completed_csr` IS NOT NULL and NOT LIKE `'ECOMM1%'` → **CSR** (agent/rep enrolled)
+- NULL or `ECOMM1%` → **Customer Self Service** (web self-enrollment)
 - `ECOMM1%` values are web session identifiers, not human CSR usernames
 - Supervisor captured at account creation time from `USER_EVENT_DETAIL` — NOT current supervisor
-
-**4. Inforce policy filter (always both conditions)**
-```sql
-AND vp.policy_inforce_indicator = 1
-AND vp.effective_from_date <= @as_of_date
-AND vp.effective_to_date   >  @as_of_date
--- WARNING: policyholder_inforce_indicator alone returns 7.2M rows — wrong
-```
 
 ---
 
@@ -95,12 +58,9 @@ AWM captures supervisor at account creation time. BIM reads current supervisor. 
 
 ## SQL Standards
 
-- Default: **CTEs**. Named, testable, readable.
-- Use **temp tables** only when: (1) inspecting intermediate counts, (2) materializing a result used by 3+ downstream steps, (3) breaking a pipeline into independently executable chunks.
-- **Tableau Custom SQL exception**: Tableau wraps queries in `SELECT * FROM (...)` — CTEs are invalid inside it. Write CTE version as source of truth in `.sql` file; maintain a separate `_tableau.sql` with nested subqueries.
-- Dedup **early** — before joins, not after. See CLAUDE_reference.md deduplication checklist.
-- No `SELECT *` in production. No correlated subqueries on large tables.
-- Always use `ROW_NUMBER()` for dedup (never RANK/DENSE_RANK).
+Generic rules (dedup, no SELECT *, ROW_NUMBER, date boundaries) are in root `CLAUDE.md` and `CLAUDE_reference.md`.
+
+**Tableau Custom SQL exception (project-specific):** Tableau wraps queries in `SELECT * FROM (...)` — CTEs are invalid inside it. Write CTE version as source of truth in `.sql`; maintain a separate `_tableau.sql` with nested subqueries.
 
 ---
 
@@ -142,10 +102,3 @@ AWM captures supervisor at account creation time. BIM reads current supervisor. 
 | Employee shows username/OTHER | Normal — CSR fields only populated for ~39% of Creation events |
 | Supervisor shows 0 under CSR | Supervisor staleness — accounts created before the supervisor change |
 
----
-
-## Tooling
-
-- **SQL Server** — primary query environment
-- **Tableau** — visualization; use `_tableau.sql` variants for Custom SQL
-- **Databricks** — future pipeline work
