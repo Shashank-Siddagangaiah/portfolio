@@ -40,6 +40,30 @@ body {
   -webkit-tap-highlight-color: transparent;
 }
 
+/* ── IN-APP BROWSER BANNER ── */
+.inapp-banner {
+  display: none;
+  background: #1A2800;
+  border-bottom: 2px solid var(--amber);
+  padding: 12px 16px;
+  align-items: flex-start;
+  gap: 10px;
+  position: sticky; top: 0; z-index: 200;
+}
+.inapp-banner.show { display: flex; }
+.inapp-banner-icon { font-size: 20px; flex-shrink: 0; margin-top: 1px; }
+.inapp-banner-text { flex: 1; font-size: 13px; color: var(--text); line-height: 1.5; }
+.inapp-banner-text strong { color: var(--amber); }
+.inapp-banner-text small { display: block; font-size: 11px; color: var(--text-muted); margin-top: 3px; }
+.inapp-copy-btn {
+  background: var(--amber); color: #0A1520;
+  border: none; border-radius: 9px;
+  padding: 9px 14px; font-size: 12px; font-weight: 800;
+  cursor: pointer; flex-shrink: 0; white-space: nowrap;
+  font-family: 'Inter', sans-serif;
+}
+.inapp-copy-btn:active { opacity: 0.85; }
+
 /* ── SETUP SCREEN ── */
 .setup-overlay {
   position: fixed; inset: 0;
@@ -439,6 +463,16 @@ body {
 </style>
 </head>
 <body>
+
+<!-- ══════════ IN-APP BROWSER WARNING ══════════ -->
+<div class="inapp-banner" id="inapp-banner">
+  <span class="inapp-banner-icon">⚠️</span>
+  <div class="inapp-banner-text">
+    <strong>Data won't save in WhatsApp's browser.</strong>
+    <small>Open this link in Chrome or Safari — your progress will be saved there.</small>
+  </div>
+  <button class="inapp-copy-btn" onclick="copyTrackerLink()">Copy Link</button>
+</div>
 
 <!-- ══════════ SETUP SCREEN ══════════ -->
 <div class="setup-overlay" id="setup-overlay">
@@ -1041,9 +1075,37 @@ function renderAll() {
 }
 
 // ═══════════════════════════════════════
+// IN-APP BROWSER DETECTION
+// ═══════════════════════════════════════
+
+function isInAppBrowser() {
+  const ua = navigator.userAgent || '';
+  if (/FBAN|FBAV|Instagram|WhatsApp|Line\/|MicroMessenger|Snapchat/.test(ua)) return true;
+  // iOS WebView: has iPhone/iPad but no Safari token (real Safari always includes it)
+  if (/iPhone|iPad/.test(ua) && !/Safari/.test(ua) && !/CriOS|FxiOS|EdgiOS/.test(ua)) return true;
+  // Android WebView flag
+  if (/Android/.test(ua) && /wv\)/.test(ua)) return true;
+  return false;
+}
+
+function copyTrackerLink() {
+  const url = window.location.href;
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(url).then(() => {
+      alert('Link copied! Paste it in Chrome or Safari to open and track your progress.');
+    }).catch(() => { prompt('Copy this link and open in Chrome or Safari:', url); });
+  } else {
+    prompt('Copy this link and open in Chrome or Safari:', url);
+  }
+}
+
+// ═══════════════════════════════════════
 // BOOT
 // ═══════════════════════════════════════
 
+if (isInAppBrowser()) {
+  document.getElementById('inapp-banner').classList.add('show');
+}
 init();
 </script>
 </body>
