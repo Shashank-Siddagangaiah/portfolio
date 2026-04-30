@@ -1,8 +1,73 @@
 # Paperless Report — Reference Material
 
-Deduplication checklist and SQL review checklist have moved to root `CLAUDE_reference.md`.
+Deduplication checklist and SQL review checklist are in root `CLAUDE_reference.md`.
 
-Read this file for project-specific Continuous Learning, organized by category for fast lookup.
+---
+
+## Critical SQL Patterns
+
+**1. Active account indicator**
+```sql
+WHERE is_up_and_running_indicator = 255   -- tinyint; NOT 1
+```
+
+**2. vw_policyholder — policy_term_key ONLY**
+```sql
+LEFT JOIN DWM.EDW.vw_policyholder vph ON vph.policy_term_key = it.policy_term_key
+-- NEVER add term_effective_date or term_expiration_date — drops 35,820 policies
+```
+
+**3. Bad anchor IDs**
+```sql
+WHERE pual.party_anchor_id NOT IN ('7771543', '13322119')
+```
+
+**4. CIF filter — both date columns**
+```sql
+WHERE cppd.effective_to_date = '9999-12-31'
+  AND cppd.valid_to_date     = '9999-12-31'
+```
+
+**5. CIF dedup — update_date not effective_from_date**
+```sql
+ROW_NUMBER() OVER (PARTITION BY cppd.cif_id ORDER BY cppd.update_date DESC)
+```
+
+**6. Email-aware grain dedup**
+```sql
+ROW_NUMBER() OVER (
+    PARTITION BY policy_term_key
+    ORDER BY
+        CASE WHEN user_name IS NOT NULL        THEN 0 ELSE 1 END,
+        CASE WHEN policyholder_type_code='NIN' THEN 0 ELSE 1 END,
+        party_key DESC
+)
+-- 47,658 policies get email from ANI — blind NIN preference drops them all
+```
+
+**7. NULL paper_notify_indicator**
+```sql
+CASE
+    WHEN MIN(paper_notify_indicator) = 0    THEN 'Y'
+    WHEN MIN(paper_notify_indicator) IS NULL THEN NULL
+    ELSE 'N'
+END
+```
+
+**8. asp_user_account_detail dedup**
+```sql
+ROW_NUMBER() OVER (PARTITION BY party_user_account_link_id ...)
+-- WRONG: PARTITION BY (link_id, user_name) → multiple rn=1 → email count > total
+```
+
+**9. BIM fallback join**
+```sql
+ON bim.policy_number = src.policy_number   -- no format stripping needed
+```
+
+---
+
+## Continuous Learning
 
 ---
 
