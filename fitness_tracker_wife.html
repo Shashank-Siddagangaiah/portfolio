@@ -295,6 +295,21 @@ body {
 .habit-circle.checked::after {
   content: '✓'; color: #fff; font-size: 14px; font-weight: 800;
 }
+.habit-circle:disabled {
+  cursor: not-allowed; opacity: 0.38; pointer-events: none;
+}
+.status-btn:disabled {
+  cursor: not-allowed; opacity: 0.35; pointer-events: none;
+}
+.wdc-notes textarea:disabled {
+  cursor: not-allowed; opacity: 0.4;
+}
+.week-locked-badge {
+  display: inline-block;
+  background: rgba(74,96,128,0.25); color: var(--text-dim);
+  font-size: 10px; font-weight: 700; border-radius: 4px;
+  padding: 2px 7px; margin-left: 8px;
+}
 
 .habits-day-col-total {
   font-size: 11px; font-weight: 800; color: var(--text-muted);
@@ -656,6 +671,10 @@ function weekNumber(weekOffset) {
   return weekOffset + 1;
 }
 
+function isWeekLocked(weekOffset) {
+  return weekOffset < getCurrentWeekOffset();
+}
+
 function totalDays() { return 112; }
 
 function programDay() {
@@ -890,8 +909,10 @@ function renderMiniGrid(dates) {
 function renderHabits() {
   const dates = getWeekDates(currentWeekOffset);
   const wNum = weekNumber(currentWeekOffset);
+  const locked = isWeekLocked(currentWeekOffset);
+  const lockBadge = locked ? ' <span class="week-locked-badge">🔒 Locked</span>' : '';
   document.getElementById('habits-week-label').innerHTML =
-    `<span class="week-num-badge">W${wNum}</span>${formatDateRange(currentWeekOffset)}`;
+    `<span class="week-num-badge">W${wNum}</span>${formatDateRange(currentWeekOffset)}${lockBadge}`;
 
   // Calculate score
   let total = 0;
@@ -922,7 +943,8 @@ function renderHabits() {
         const key = isoDate(d);
         const checked = (data.habits[key] || [])[hi] === true;
         return `<td><button class="habit-circle ${checked ? 'checked' : ''}"
-          onclick="toggleHabit('${key}',${hi})" aria-label="${h.name} ${DAYS[di]}"></button></td>`;
+          onclick="toggleHabit('${key}',${hi})" ${locked ? 'disabled' : ''}
+          aria-label="${h.name} ${DAYS[di]}"></button></td>`;
       }).join('')}
       <td><span class="habit-row-total">${habitTotals[hi]}/7</span></td>
     </tr>`;
@@ -953,8 +975,10 @@ function toggleHabit(dateKey, habitIdx) {
 function renderWorkouts() {
   const dates = getWeekDates(currentWeekOffset);
   const wNum = weekNumber(currentWeekOffset);
+  const locked = isWeekLocked(currentWeekOffset);
+  const lockBadge = locked ? ' <span class="week-locked-badge">🔒 Locked</span>' : '';
   document.getElementById('workouts-week-label').innerHTML =
-    `<span class="week-num-badge">W${wNum}</span>${formatDateRange(currentWeekOffset)}`;
+    `<span class="week-num-badge">W${wNum}</span>${formatDateRange(currentWeekOffset)}${lockBadge}`;
 
   const container = document.getElementById('workout-cards');
   container.innerHTML = dates.map((d, i) => {
@@ -978,13 +1002,13 @@ function renderWorkouts() {
         </div>
       </div>
       <div class="wdc-actions">
-        <button class="status-btn btn-done ${status==='done'?'active':''}" onclick="setWorkout('${key}','done')">✅ Done</button>
-        <button class="status-btn btn-rest ${status==='rest'?'active':''}" onclick="setWorkout('${key}','rest')">😴 Rest</button>
-        <button class="status-btn btn-skip ${status==='skip'?'active':''}" onclick="setWorkout('${key}','skip')">❌ Skip</button>
+        <button class="status-btn btn-done ${status==='done'?'active':''}" onclick="setWorkout('${key}','done')" ${locked?'disabled':''}>✅ Done</button>
+        <button class="status-btn btn-rest ${status==='rest'?'active':''}" onclick="setWorkout('${key}','rest')" ${locked?'disabled':''}>😴 Rest</button>
+        <button class="status-btn btn-skip ${status==='skip'?'active':''}" onclick="setWorkout('${key}','skip')" ${locked?'disabled':''}>❌ Skip</button>
       </div>
       <div class="wdc-notes">
         <textarea id="notes-${key}" placeholder="Notes (optional)..." rows="2"
-          onblur="saveNotes('${key}')">${w.notes || ''}</textarea>
+          oninput="saveNotes('${key}')" ${locked?'disabled':''}>${w.notes || ''}</textarea>
       </div>
     </div>`;
   }).join('');
