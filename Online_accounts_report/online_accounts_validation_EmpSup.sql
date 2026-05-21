@@ -131,6 +131,20 @@ ORDER BY party_count DESC;
 
 
 -- ============================================================
+-- Pre-compute: Username → full name map — mirrors production query.
+-- Resolves usernames where account_csr_full_name is NULL on the Creation row.
+-- ============================================================
+DROP TABLE IF EXISTS #csr_name_map;
+SELECT
+    account_creation_completed_csr
+    , MAX(account_csr_full_name) AS resolved_full_name
+INTO #csr_name_map
+FROM AWM.DBO.USER_EVENT_DETAIL
+WHERE NULLIF(account_csr_full_name, '') IS NOT NULL
+GROUP BY account_creation_completed_csr;
+
+
+-- ============================================================
 -- SECTION 3S: AWM Inforce — Sanity Check
 -- Run this first. Verify no NULLs, check 'Customer Self Service'
 -- rows have consistent Employee/Supervisor, confirm agent path
@@ -148,19 +162,23 @@ FROM (
         , 'Inforce'                                 AS DateType
         , CASE
             WHEN ISNULL(ued.account_creation_completed_csr, '') <> ''
+              AND ued.account_creation_completed_csr NOT LIKE 'ECOMM1%'
                 THEN COALESCE(NULLIF(ued.account_csr_department, ''), 'Community Agents & Other')
             ELSE 'Customer Self Service'
           END                                       AS CostCenter
         , CASE
             WHEN ISNULL(ued.account_creation_completed_csr, '') <> ''
+              AND ued.account_creation_completed_csr NOT LIKE 'ECOMM1%'
                 THEN COALESCE(
                          NULLIF(ued.account_csr_full_name, '')
+                         , nm.resolved_full_name
                          , UPPER(LTRIM(RTRIM(ued.account_creation_completed_csr)))
                      )
             ELSE 'Customer Self Service'
           END                                       AS Employee
         , CASE
             WHEN ISNULL(ued.account_creation_completed_csr, '') <> ''
+              AND ued.account_creation_completed_csr NOT LIKE 'ECOMM1%'
                 THEN COALESCE(
                          NULLIF(ued.account_csr_supervisor_name, '')
                          , 'OTHER'
@@ -203,22 +221,28 @@ FROM (
         WHERE EVENT_TYPE = 'Creation'
     ) ued ON ued.DATA_1 = uad.user_name
           AND ued.rn = 1
+    LEFT JOIN #csr_name_map nm
+        ON nm.account_creation_completed_csr = ued.account_creation_completed_csr
     GROUP BY
         CASE
             WHEN ISNULL(ued.account_creation_completed_csr, '') <> ''
+              AND ued.account_creation_completed_csr NOT LIKE 'ECOMM1%'
                 THEN COALESCE(NULLIF(ued.account_csr_department, ''), 'Community Agents & Other')
             ELSE 'Customer Self Service'
         END
         , CASE
             WHEN ISNULL(ued.account_creation_completed_csr, '') <> ''
+              AND ued.account_creation_completed_csr NOT LIKE 'ECOMM1%'
                 THEN COALESCE(
                          NULLIF(ued.account_csr_full_name, '')
+                         , nm.resolved_full_name
                          , UPPER(LTRIM(RTRIM(ued.account_creation_completed_csr)))
                      )
             ELSE 'Customer Self Service'
           END
         , CASE
             WHEN ISNULL(ued.account_creation_completed_csr, '') <> ''
+              AND ued.account_creation_completed_csr NOT LIKE 'ECOMM1%'
                 THEN COALESCE(
                          NULLIF(ued.account_csr_supervisor_name, '')
                          , 'OTHER'
@@ -344,19 +368,23 @@ ORDER BY COUNT(*) DESC;
 SELECT
     CASE
         WHEN ISNULL(ued.account_creation_completed_csr, '') <> ''
+          AND ued.account_creation_completed_csr NOT LIKE 'ECOMM1%'
             THEN COALESCE(NULLIF(ued.account_csr_department, ''), 'Community Agents & Other')
         ELSE 'Customer Self Service'
     END                                             AS CostCenter
     , CASE
         WHEN ISNULL(ued.account_creation_completed_csr, '') <> ''
+          AND ued.account_creation_completed_csr NOT LIKE 'ECOMM1%'
             THEN COALESCE(
                      NULLIF(ued.account_csr_full_name, '')
+                     , nm.resolved_full_name
                      , UPPER(LTRIM(RTRIM(ued.account_creation_completed_csr)))
                  )
         ELSE 'Customer Self Service'
     END                                             AS Employee
     , CASE
         WHEN ISNULL(ued.account_creation_completed_csr, '') <> ''
+          AND ued.account_creation_completed_csr NOT LIKE 'ECOMM1%'
             THEN COALESCE(
                      NULLIF(ued.account_csr_supervisor_name, '')
                      , 'OTHER'
@@ -399,22 +427,28 @@ LEFT JOIN (
     WHERE EVENT_TYPE = 'Creation'
 ) ued ON ued.DATA_1 = uad.user_name
       AND ued.rn = 1
+LEFT JOIN #csr_name_map nm
+    ON nm.account_creation_completed_csr = ued.account_creation_completed_csr
 GROUP BY
     CASE
         WHEN ISNULL(ued.account_creation_completed_csr, '') <> ''
+          AND ued.account_creation_completed_csr NOT LIKE 'ECOMM1%'
             THEN COALESCE(NULLIF(ued.account_csr_department, ''), 'Community Agents & Other')
         ELSE 'Customer Self Service'
     END
     , CASE
         WHEN ISNULL(ued.account_creation_completed_csr, '') <> ''
+          AND ued.account_creation_completed_csr NOT LIKE 'ECOMM1%'
             THEN COALESCE(
                      NULLIF(ued.account_csr_full_name, '')
+                     , nm.resolved_full_name
                      , UPPER(LTRIM(RTRIM(ued.account_creation_completed_csr)))
                  )
         ELSE 'Customer Self Service'
       END
     , CASE
         WHEN ISNULL(ued.account_creation_completed_csr, '') <> ''
+          AND ued.account_creation_completed_csr NOT LIKE 'ECOMM1%'
             THEN COALESCE(
                      NULLIF(ued.account_csr_supervisor_name, '')
                      , 'OTHER'
@@ -485,9 +519,9 @@ GROUP BY CSRCompletedAccountCreation, CostCenter, Employee, CSRCompletedAccountC
 
 DROP TABLE IF EXISTS #awm_inforce_emp;
 SELECT
-    CASE WHEN ISNULL(ued.account_creation_completed_csr, '') <> '' THEN COALESCE(NULLIF(ued.account_csr_department, ''), 'Community Agents & Other') ELSE 'Customer Self Service' END AS CostCenter
-    , CASE WHEN ISNULL(ued.account_creation_completed_csr, '') <> '' THEN COALESCE(NULLIF(ued.account_csr_full_name, ''), UPPER(LTRIM(RTRIM(ued.account_creation_completed_csr)))) ELSE 'Customer Self Service' END AS Employee
-    , CASE WHEN ISNULL(ued.account_creation_completed_csr, '') <> '' THEN COALESCE(NULLIF(ued.account_csr_supervisor_name, ''), 'OTHER') ELSE 'Customer Self Service' END AS Supervisor
+    CASE WHEN ISNULL(ued.account_creation_completed_csr, '') <> '' AND ued.account_creation_completed_csr NOT LIKE 'ECOMM1%' THEN COALESCE(NULLIF(ued.account_csr_department, ''), 'Community Agents & Other') ELSE 'Customer Self Service' END AS CostCenter
+    , CASE WHEN ISNULL(ued.account_creation_completed_csr, '') <> '' AND ued.account_creation_completed_csr NOT LIKE 'ECOMM1%' THEN COALESCE(NULLIF(ued.account_csr_full_name, ''), nm.resolved_full_name, UPPER(LTRIM(RTRIM(ued.account_creation_completed_csr)))) ELSE 'Customer Self Service' END AS Employee
+    , CASE WHEN ISNULL(ued.account_creation_completed_csr, '') <> '' AND ued.account_creation_completed_csr NOT LIKE 'ECOMM1%' THEN COALESCE(NULLIF(ued.account_csr_supervisor_name, ''), 'OTHER') ELSE 'Customer Self Service' END AS Supervisor
     , COUNT(DISTINCT pual.party_anchor_id) AS AWM_Total
 INTO #awm_inforce_emp
 FROM (SELECT party_user_account_link_id, user_name, ROW_NUMBER() OVER (PARTITION BY party_user_account_link_id ORDER BY valid_from_date DESC, valid_to_date DESC) AS rn FROM AWM.dbo.asp_user_account_detail WHERE is_up_and_running_indicator = 255) uad
@@ -496,10 +530,11 @@ INNER JOIN AWM.dbo.party_id_same_as_link pil ON pil.party_anchor_id_duplicate = 
 INNER JOIN DWM.EDW.vw_policyholder vph ON vph.party_key = pil.party_anchor_id_master
 INNER JOIN DWM.EDW.vw_policy vp ON vp.policy_term_key = vph.policy_term_key AND vp.policy_inforce_indicator = 1 AND vp.effective_from_date <= CAST(GETDATE() AS DATE) AND vp.effective_to_date > CAST(GETDATE() AS DATE)
 LEFT JOIN (SELECT DATA_1, account_creation_completed_csr, account_csr_department, account_csr_full_name, account_csr_supervisor_name, ROW_NUMBER() OVER (PARTITION BY DATA_1 ORDER BY EVENT_DATE ASC) AS rn FROM AWM.DBO.USER_EVENT_DETAIL WHERE EVENT_TYPE = 'Creation') ued ON ued.DATA_1 = uad.user_name AND ued.rn = 1
+LEFT JOIN #csr_name_map nm ON nm.account_creation_completed_csr = ued.account_creation_completed_csr
 GROUP BY
-    CASE WHEN ISNULL(ued.account_creation_completed_csr, '') <> '' THEN COALESCE(NULLIF(ued.account_csr_department, ''), 'Community Agents & Other') ELSE 'Customer Self Service' END
-    , CASE WHEN ISNULL(ued.account_creation_completed_csr, '') <> '' THEN COALESCE(NULLIF(ued.account_csr_full_name, ''), UPPER(LTRIM(RTRIM(ued.account_creation_completed_csr)))) ELSE 'Customer Self Service' END
-    , CASE WHEN ISNULL(ued.account_creation_completed_csr, '') <> '' THEN COALESCE(NULLIF(ued.account_csr_supervisor_name, ''), 'OTHER') ELSE 'Customer Self Service' END;
+    CASE WHEN ISNULL(ued.account_creation_completed_csr, '') <> '' AND ued.account_creation_completed_csr NOT LIKE 'ECOMM1%' THEN COALESCE(NULLIF(ued.account_csr_department, ''), 'Community Agents & Other') ELSE 'Customer Self Service' END
+    , CASE WHEN ISNULL(ued.account_creation_completed_csr, '') <> '' AND ued.account_creation_completed_csr NOT LIKE 'ECOMM1%' THEN COALESCE(NULLIF(ued.account_csr_full_name, ''), nm.resolved_full_name, UPPER(LTRIM(RTRIM(ued.account_creation_completed_csr)))) ELSE 'Customer Self Service' END
+    , CASE WHEN ISNULL(ued.account_creation_completed_csr, '') <> '' AND ued.account_creation_completed_csr NOT LIKE 'ECOMM1%' THEN COALESCE(NULLIF(ued.account_csr_supervisor_name, ''), 'OTHER') ELSE 'Customer Self Service' END;
 
 
 -- Delta comparison — Inforce Employee/Supervisor
@@ -654,19 +689,23 @@ ORDER BY COUNT(*) DESC;
 SELECT
     CASE
         WHEN ISNULL(ued.account_creation_completed_csr, '') <> ''
+          AND ued.account_creation_completed_csr NOT LIKE 'ECOMM1%'
             THEN COALESCE(NULLIF(ued.account_csr_department, ''), 'Community Agents & Other')
         ELSE 'Customer Self Service'
     END                                             AS CostCenter
     , CASE
         WHEN ISNULL(ued.account_creation_completed_csr, '') <> ''
+          AND ued.account_creation_completed_csr NOT LIKE 'ECOMM1%'
             THEN COALESCE(
                      NULLIF(ued.account_csr_full_name, '')
+                     , nm.resolved_full_name
                      , UPPER(LTRIM(RTRIM(ued.account_creation_completed_csr)))
                  )
         ELSE 'Customer Self Service'
     END                                             AS Employee
     , CASE
         WHEN ISNULL(ued.account_creation_completed_csr, '') <> ''
+          AND ued.account_creation_completed_csr NOT LIKE 'ECOMM1%'
             THEN COALESCE(
                      NULLIF(ued.account_csr_supervisor_name, '')
                      , 'OTHER'
@@ -709,6 +748,8 @@ LEFT JOIN (
     WHERE EVENT_TYPE = 'Creation'
 ) ued ON ued.DATA_1 = uad.user_name
       AND ued.rn = 1
+LEFT JOIN #csr_name_map nm
+    ON nm.account_creation_completed_csr = ued.account_creation_completed_csr
 INNER JOIN (
     SELECT party_key
     FROM DWM.EDW.vw_policy_driver
@@ -721,19 +762,23 @@ INNER JOIN (
 GROUP BY
     CASE
         WHEN ISNULL(ued.account_creation_completed_csr, '') <> ''
+          AND ued.account_creation_completed_csr NOT LIKE 'ECOMM1%'
             THEN COALESCE(NULLIF(ued.account_csr_department, ''), 'Community Agents & Other')
         ELSE 'Customer Self Service'
     END
     , CASE
         WHEN ISNULL(ued.account_creation_completed_csr, '') <> ''
+          AND ued.account_creation_completed_csr NOT LIKE 'ECOMM1%'
             THEN COALESCE(
                      NULLIF(ued.account_csr_full_name, '')
+                     , nm.resolved_full_name
                      , UPPER(LTRIM(RTRIM(ued.account_creation_completed_csr)))
                  )
         ELSE 'Customer Self Service'
       END
     , CASE
         WHEN ISNULL(ued.account_creation_completed_csr, '') <> ''
+          AND ued.account_creation_completed_csr NOT LIKE 'ECOMM1%'
             THEN COALESCE(
                      NULLIF(ued.account_csr_supervisor_name, '')
                      , 'OTHER'
@@ -752,10 +797,227 @@ ORDER BY COUNT(DISTINCT pual.party_anchor_id) DESC;
 
 /*
 DROP TABLE IF EXISTS #bim_driver_emp;
--- paste 4A query above with INTO #bim_driver_emp (remove ORDER BY)
+SELECT
+    CASE
+        WHEN CSRCompletedAccountCreation = 'true'
+            THEN COALESCE(CostCenter, 'Community Agents & Other')
+        ELSE 'Customer Self Service'
+    END                                             AS CostCenter
+    , CASE
+        WHEN CSRCompletedAccountCreation = 'true' AND ProducerName IS NULL
+            THEN COALESCE(Employee, CSRCompletedAccountCreationCSR)
+        WHEN CSRCompletedAccountCreation = 'true' AND ProducerName IS NOT NULL
+            THEN COALESCE(Employee, ProducerName)
+        ELSE 'Customer Self Service'
+    END                                             AS Employee
+    , CASE
+        WHEN CSRCompletedAccountCreation = 'true' AND AgencyName IS NULL
+            THEN COALESCE(Supervisor, 'OTHER')
+        WHEN CSRCompletedAccountCreation = 'true' AND AgencyName IS NOT NULL
+            THEN COALESCE(Supervisor, AgencyName)
+        ELSE 'Customer Self Service'
+    END                                             AS Supervisor
+    , COUNT(*)                                      AS BIM_Total
+INTO #bim_driver_emp
+FROM (
+    SELECT DISTINCT
+        u.CifId
+        , u.UserName
+        , u.CSRCompletedAccountCreation
+        , u.CSRCompletedAccountCreationCSR
+        , CASE
+            WHEN ISNULL(u.AccountStatusXml.value('(/AccountStatus/CSRCompletedAccountFullName)[1]', 'varchar(50)'), '') <> ''
+                THEN u.AccountStatusXml.value('(/AccountStatus/CSRCompletedAccountFullName)[1]', 'varchar(50)')
+            ELSE e.pfsEmp_First_Last_Nm
+          END                                       AS Employee
+        , CASE
+            WHEN ISNULL(u.AccountStatusXml.value('(/AccountStatus/CSRCompletedAccountSupervisorName)[1]', 'varchar(50)'), '') <> ''
+                THEN u.AccountStatusXml.value('(/AccountStatus/CSRCompletedAccountSupervisorName)[1]', 'varchar(50)')
+            ELSE e.pfsEmp_Supervisor_First_Nm + ' ' + e.pfsEmp_Supervisor_Last_Nm
+          END                                       AS Supervisor
+        , CASE
+            WHEN ISNULL(u.AccountStatusXml.value('(/AccountStatus/CSRCompletedAccountDepartment)[1]', 'varchar(50)'), '') <> ''
+                THEN u.AccountStatusXml.value('(/AccountStatus/CSRCompletedAccountDepartment)[1]', 'varchar(50)')
+            ELSE e.pfsEmp_pfsCostCtr_Nm
+          END                                       AS CostCenter
+        , ROW_NUMBER() OVER (
+            PARTITION BY u.CifId
+            ORDER BY CASE
+                WHEN u.CSRCompletedAccountCreation = 'true'
+                    THEN DATEADD(day, DATEDIFF(day, 0, u.AgreeTCDate), 0)
+                ELSE LEFT(u.KBAIdentificationDate, 21)
+            END DESC
+          )                                         AS rn
+    FROM ASPMembership_PRX.dbo.UserAccountDetails u (NOLOCK)
+    LEFT JOIN [BIM_Reporting_Daily].OneSource.pfs_Employee_new e (NOLOCK)
+        ON u.CSRCompletedAccountCreationCSR = e.pfsEmp_Logon_Id
+    LEFT JOIN [BIM_Reporting_Daily].MEM.Inforce_Pol ip (NOLOCK)
+        ON ip.CifId = u.CifId
+    WHERE ISNULL(ip.CifId, '') <> ''
+      AND u.IsUpAndRunning = 1
+      AND ((u.CSRCompletedAccountCreation = 'true' AND u.AgreeTC = 1)
+           OR (u.CSRCompletedAccountCreation = 'false'
+               AND u.KBAIdentificationStatus IN ('UserCompleted', 'NotAttemptedIgnore')))
+) Detail
+LEFT JOIN (
+    SELECT
+        REPLACE(REPLACE(C.CICL_LNG_NM, '+ ', ''), '+', '')         AS AgencyName
+        , RTRIM(C1.CICL_FST_NM) + ' ' + LTRIM(C1.CICL_LST_NM)     AS ProducerName
+        , SU.SEC_USR_ID
+    FROM Exceed_Reporting.XCD.SEC_USRS SU
+    LEFT JOIN Exceed_Reporting.XCD.CLIENT_TAB C1 (NOLOCK) ON C1.CLIENT_ID = SU.SEC_USR_CLT_ID
+    LEFT JOIN Exceed_Reporting.XCD.CCM_PRODUCER CP (NOLOCK) ON CP.CPR_PDC_CLIENT_ID = C1.CLIENT_ID
+    LEFT JOIN Exceed_Reporting.XCD.CCM_AGC_PRODUCER CAP (NOLOCK) ON CAP.CCM_PRODUCER_ID = CP.CCM_PRODUCER_ID
+    LEFT JOIN Exceed_Reporting.XCD.CCM_CONTRACT CT (NOLOCK)
+        ON CAP.CCM_AGENCY_ID = CT.CCM_AGENCY_ID
+       AND CAP.CCM_PRODUCER_NBR = CT.CTT_CONTRACT_NBR
+       AND CAP.HISTORY_VLD_NBR = 0
+    LEFT JOIN Exceed_Reporting.XCD.CLIENT_TAB C (NOLOCK) ON C.CLIENT_ID = CT.CTT_CTT_CLT_ID
+    WHERE (C1.CICL_EXP_DT = '9999-12-31' OR C1.CICL_EXP_DT IS NULL)
+      AND (C.CICL_EXP_DT  = '9999-12-31' OR C.CICL_EXP_DT IS NULL)
+      AND (CT.CTT_CTT_EXP_DT > GETDATE() OR CT.CTT_CTT_EXP_DT IS NULL)
+      AND CT.CCM_CONTRACT_ID IS NOT NULL
+    GROUP BY
+        REPLACE(REPLACE(C.CICL_LNG_NM, '+ ', ''), '+', '')
+        , RTRIM(C1.CICL_FST_NM) + ' ' + LTRIM(C1.CICL_LST_NM)
+        , SU.SEC_USR_ID
+) AgentDetail
+    ON Detail.CSRCompletedAccountCreationCSR = AgentDetail.SEC_USR_ID
+   AND ISNULL(Detail.Supervisor, '') = ''
+INNER JOIN (
+    SELECT CifId
+    FROM (
+        SELECT u2.CifId
+            , SUM(CASE WHEN pr.prld_code IN ('NI', 'ANI') THEN 1 ELSE 0 END) AS NI_ANI_COUNT
+            , SUM(CASE WHEN pr.prld_code = 'DR'           THEN 1 ELSE 0 END) AS DR_COUNT
+        FROM ASPMembership_PRX..users u2 (NOLOCK)
+        JOIN BIM_Reporting_Weekly.CIFDM.dim_person p (NOLOCK)
+            ON u2.CifId = p.psnd_clt_id_cif
+        JOIN BIM_Reporting_Weekly.CIFDM.fact_person_coverage pc (NOLOCK)
+            ON p.psnd_id = pc.pcvf_psnd_id
+        JOIN BIM_Reporting_Weekly.CIFDM.dim_policy_role pr (NOLOCK)
+            ON pc.pcvf_prld_id = pr.prld_id
+        WHERE pc.pcvf_run_effective_date_td_id = (
+            SELECT MAX(td_id) FROM BIM_Reporting_Weekly.CIFDM.dim_time
+        )
+        GROUP BY u2.CifId
+    ) roles
+    WHERE NI_ANI_COUNT = 0 AND DR_COUNT > 0
+) dr ON dr.CifId = Detail.CifId
+WHERE rn = 1
+GROUP BY
+    CSRCompletedAccountCreation
+    , CostCenter
+    , Employee
+    , CSRCompletedAccountCreationCSR
+    , Supervisor
+    , ProducerName
+    , AgencyName
+    , SEC_USR_ID;
+
 
 DROP TABLE IF EXISTS #awm_driver_emp;
--- paste 4B query above with INTO #awm_driver_emp (remove ORDER BY)
+SELECT
+    CASE
+        WHEN ISNULL(ued.account_creation_completed_csr, '') <> ''
+          AND ued.account_creation_completed_csr NOT LIKE 'ECOMM1%'
+            THEN COALESCE(NULLIF(ued.account_csr_department, ''), 'Community Agents & Other')
+        ELSE 'Customer Self Service'
+    END                                             AS CostCenter
+    , CASE
+        WHEN ISNULL(ued.account_creation_completed_csr, '') <> ''
+          AND ued.account_creation_completed_csr NOT LIKE 'ECOMM1%'
+            THEN COALESCE(
+                     NULLIF(ued.account_csr_full_name, '')
+                     , nm.resolved_full_name
+                     , UPPER(LTRIM(RTRIM(ued.account_creation_completed_csr)))
+                 )
+        ELSE 'Customer Self Service'
+    END                                             AS Employee
+    , CASE
+        WHEN ISNULL(ued.account_creation_completed_csr, '') <> ''
+          AND ued.account_creation_completed_csr NOT LIKE 'ECOMM1%'
+            THEN COALESCE(
+                     NULLIF(ued.account_csr_supervisor_name, '')
+                     , 'OTHER'
+                 )
+        ELSE 'Customer Self Service'
+    END                                             AS Supervisor
+    , COUNT(DISTINCT pual.party_anchor_id)          AS AWM_Total
+INTO #awm_driver_emp
+FROM (
+    SELECT
+        party_user_account_link_id
+        , user_name
+        , ROW_NUMBER() OVER (
+            PARTITION BY party_user_account_link_id
+            ORDER BY valid_from_date DESC, valid_to_date DESC
+          ) AS rn
+    FROM AWM.dbo.asp_user_account_detail
+    WHERE is_up_and_running_indicator = 255
+) uad
+INNER JOIN AWM.dbo.party_user_account_link pual
+    ON pual.party_user_account_link_id = uad.party_user_account_link_id
+   AND uad.rn = 1
+INNER JOIN AWM.dbo.party_id_same_as_link pil
+    ON pil.party_anchor_id_duplicate = pual.party_anchor_id
+INNER JOIN DWM.EDW.vw_policyholder vph
+    ON vph.party_key = pil.party_anchor_id_master
+INNER JOIN DWM.EDW.vw_policy vp
+    ON vp.policy_term_key = vph.policy_term_key
+   AND vp.policy_inforce_indicator = 1
+   AND vp.effective_from_date <= CAST(GETDATE() AS DATE)
+   AND vp.effective_to_date > CAST(GETDATE() AS DATE)
+LEFT JOIN (
+    SELECT
+        DATA_1
+        , account_creation_completed_csr
+        , account_csr_department
+        , account_csr_full_name
+        , account_csr_supervisor_name
+        , ROW_NUMBER() OVER (PARTITION BY DATA_1 ORDER BY EVENT_DATE ASC) AS rn
+    FROM AWM.DBO.USER_EVENT_DETAIL
+    WHERE EVENT_TYPE = 'Creation'
+) ued ON ued.DATA_1 = uad.user_name
+      AND ued.rn = 1
+LEFT JOIN #csr_name_map nm
+    ON nm.account_creation_completed_csr = ued.account_creation_completed_csr
+INNER JOIN (
+    SELECT party_key
+    FROM DWM.EDW.vw_policy_driver
+    WHERE driver_inforce_indicator = 1
+      AND effective_from_date <= CAST(GETDATE() AS DATE)
+      AND effective_to_date > CAST(GETDATE() AS DATE)
+    GROUP BY party_key
+    HAVING SUM(CASE WHEN policyholder_type_code IN ('NIN', 'ANI') THEN 1 ELSE 0 END) = 0
+) DriverOnly ON DriverOnly.party_key = pil.party_anchor_id_master
+GROUP BY
+    CASE
+        WHEN ISNULL(ued.account_creation_completed_csr, '') <> ''
+          AND ued.account_creation_completed_csr NOT LIKE 'ECOMM1%'
+            THEN COALESCE(NULLIF(ued.account_csr_department, ''), 'Community Agents & Other')
+        ELSE 'Customer Self Service'
+    END
+    , CASE
+        WHEN ISNULL(ued.account_creation_completed_csr, '') <> ''
+          AND ued.account_creation_completed_csr NOT LIKE 'ECOMM1%'
+            THEN COALESCE(
+                     NULLIF(ued.account_csr_full_name, '')
+                     , nm.resolved_full_name
+                     , UPPER(LTRIM(RTRIM(ued.account_creation_completed_csr)))
+                 )
+        ELSE 'Customer Self Service'
+      END
+    , CASE
+        WHEN ISNULL(ued.account_creation_completed_csr, '') <> ''
+          AND ued.account_creation_completed_csr NOT LIKE 'ECOMM1%'
+            THEN COALESCE(
+                     NULLIF(ued.account_csr_supervisor_name, '')
+                     , 'OTHER'
+                 )
+        ELSE 'Customer Self Service'
+      END;
+
 
 SELECT
     COALESCE(b.CostCenter,   a.CostCenter)          AS CostCenter

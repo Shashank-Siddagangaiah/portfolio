@@ -158,9 +158,9 @@ select
     ltrim(rtrim(pa.policy_number))                                                              as policy_number_raw,
     ppl.party_anchor_id,
     max(case when d1.output_document_type_code = 'BIL' then d1.paper_notify_indicator end)     as BIL_paper_notify,
-    max(case when d1.output_document_type_code = 'BIL' then d1.effective_from_date    end)     as PaperlessBillDate,
+    max(case when d1.output_document_type_code = 'BIL' then d1.effective_from_date    end)     as paperless_bill_date,
     max(case when d1.output_document_type_code = 'POL' then d1.paper_notify_indicator end)     as POL_paper_notify,
-    max(case when d1.output_document_type_code = 'POL' then d1.effective_from_date    end)     as PaperlessPolDate
+    max(case when d1.output_document_type_code = 'POL' then d1.effective_from_date    end)     as paperless_pol_date
 into #CIF_POLICY_Detail2
 from #CIF_POLICY_Detail1 d1
 inner join AWM.dbo.policy_party_link ppl
@@ -186,10 +186,10 @@ select
     c.policy_number_raw,
     c.party_anchor_id,
     -- FIX 4: NULL stays NULL (0 = paperless = Y; NULL = no record = unknown)
-    case when c.BIL_paper_notify = 0 then 'Y' when c.BIL_paper_notify is null then null else 'N' end  as Paperless_Bil_Ind,
-    c.PaperlessBillDate,
-    case when c.POL_paper_notify = 0 then 'Y' when c.POL_paper_notify is null then null else 'N' end  as Paperless_Pol_Ind,
-    c.PaperlessPolDate
+    case when c.BIL_paper_notify = 0 then 'Y' when c.BIL_paper_notify is null then null else 'N' end  as paperless_bil_ind,
+    c.paperless_bill_date,
+    case when c.POL_paper_notify = 0 then 'Y' when c.POL_paper_notify is null then null else 'N' end  as paperless_pol_ind,
+    c.paperless_pol_date
 into #CIF_POLICY_Detail
 from #CIF_POLICY_Detail2 c
 ;
@@ -466,10 +466,10 @@ select
     src.mailing_address_zip_code    as Zip,
     src.original_effective_date,
     -- CIF paperless indicators — primary source of truth (AWM)
-    src.Paperless_Bil_Ind,
-    src.PaperlessBillDate,
-    src.Paperless_Pol_Ind,
-    src.PaperlessPolDate,
+    src.paperless_bil_ind,
+    src.paperless_bill_date,
+    src.paperless_pol_ind,
+    src.paperless_pol_date,
     -- Agent / sales channel
     src.agent_number                as AgentNumber,
     src.agent_name,
@@ -498,10 +498,10 @@ into #New_Paper_Report
 from (
     select
         b.*,
-        cif.Paperless_Bil_Ind,
-        cif.PaperlessBillDate,
-        cif.Paperless_Pol_Ind,
-        cif.PaperlessPolDate,
+        cif.paperless_bil_ind,
+        cif.paperless_bill_date,
+        cif.paperless_pol_ind,
+        cif.paperless_pol_date,
         ag.agent_number,
         ag.agent_name,
         ag.sales_channel_code,
@@ -533,21 +533,7 @@ from (
     from #base_data b
     left join #CIF_POLICY_Detail cif
         on  cif.party_anchor_id   = b.duplicate_party_anchor_id
-        -- FIX: join on full policy_number_raw to avoid cross-LOB collisions.
-        -- 'CA 1774271' (CIF) matches only 'CA 1774271' (b) — not 'HO 1774271'.
-        -- Bare CIF rows (no prefix, e.g. '1774271') fall through to the second condition
-        -- and match any b.policy_number whose numeric part equals the bare anchor number.
-        and (
-            cif.policy_number_raw = ltrim(rtrim(b.policy_number))
-            or (
-                cif.policy_number_raw not like '% %'
-                and cif.policy_number_raw = case
-                        when b.policy_number like '% %'
-                            then substring(b.policy_number, charindex(' ', b.policy_number) + 1, len(b.policy_number))
-                        else b.policy_number
-                    end
-            )
-        )
+        and cif.policy_number_raw = ltrim(rtrim(b.policy_number))
     left join #ct_asp_membership m
         on  m.party_anchor_id = b.duplicate_party_anchor_id
         and m.rn_membership   = 1
@@ -630,8 +616,8 @@ select
     count(*)                                                            as total_rows,
     sum(case when EmailAddress is not null  then 1 else 0 end)         as has_email,
     sum(case when EmailAddress is null      then 1 else 0 end)         as no_email,
-    sum(case when Paperless_Bil_Ind = 'Y'  then 1 else 0 end)         as paperless_bill_y,
-    sum(case when Paperless_Pol_Ind = 'Y'  then 1 else 0 end)         as paperless_pol_y,
+    sum(case when paperless_bil_ind = 'Y'  then 1 else 0 end)         as paperless_bill_y,
+    sum(case when paperless_pol_ind = 'Y'  then 1 else 0 end)         as paperless_pol_y,
     sum(case when PolicyStatus = 'INFORCE' then 1 else 0 end)         as inforce_count
 from #New_Paper_Report
 ;

@@ -16,19 +16,17 @@ desktop.ini
 *.tmp
 *.bak
 
-# Claude Code — ignore local settings, allow skills to be versioned
-.claude/*
-!.claude/skills/
-!.claude/skills/**
+# Claude Code
+.claude/
 
-# Claude personal overrides (never commit)
-CLAUDE.local.md
-**/CLAUDE.local.md
+# Nested git repos (tracked separately)
+Fitness_app/evofit/
 
-# Scratch / personal files at root
-fitness_plan.html
-.gq_*.py
+# Python
+__pycache__/
+*.pyc
 
-# graphify regenerated artifacts (large, no value in history)
-graphify-out/cache/
-graphify-out/.graphify_chunk_*.json
+# Data / secrets
+calude_token/
+*.xlsx
+*.csv

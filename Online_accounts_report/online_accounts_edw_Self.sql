@@ -33,6 +33,7 @@
 -- ============================================================
 IF OBJECT_ID('tempdb..#inforce_base') IS NOT NULL DROP TABLE #inforce_base;
 IF OBJECT_ID('tempdb..#creation_csr')  IS NOT NULL DROP TABLE #creation_csr;
+IF OBJECT_ID('tempdb..#csr_name_map')  IS NOT NULL DROP TABLE #csr_name_map;
 
 
 -- ============================================================
@@ -96,6 +97,23 @@ WHERE rn = 1;
 
 
 -- ============================================================
+-- Pre-compute 3: Username → full name map (AWM-only).
+-- MAX(account_csr_full_name) per username across all event types.
+-- Resolves usernames that fall back to raw text in Employee when
+-- account_csr_full_name is NULL on the specific activation/creation row.
+-- Usernames with no name in any event (e.g. AAABRA) remain NULL here
+-- and fall through to the UPPER(username) fallback.
+-- ============================================================
+SELECT
+    account_creation_completed_csr
+    , MAX(account_csr_full_name) AS resolved_full_name
+INTO #csr_name_map
+FROM AWM.DBO.USER_EVENT_DETAIL
+WHERE NULLIF(account_csr_full_name, '') IS NOT NULL
+GROUP BY account_creation_completed_csr;
+
+
+-- ============================================================
 -- Final report
 -- Sections 1 & 2 use CTEs (single scan each).
 -- Sections 3 & 4 read from the pre-computed temp tables.
@@ -139,36 +157,43 @@ SELECT
     ActivationDate                               AS Date
     , 'Activation'                               AS DateType
     , CASE
-        WHEN account_creation_completed_csr <> ''
-          AND account_creation_completed_csr NOT LIKE 'ECOMM1%'
+        WHEN ActivationCTE.account_creation_completed_csr <> ''
+          AND ActivationCTE.account_creation_completed_csr NOT LIKE 'ECOMM1%'
             THEN CASE
-                    WHEN account_csr_department = '' THEN 'Community Agents & Other'
-                    ELSE account_csr_department
+                    WHEN ActivationCTE.account_csr_department = '' THEN 'Community Agents & Other'
+                    ELSE ActivationCTE.account_csr_department
                  END
         ELSE 'Customer Self Service'
       END                                        AS CostCenter
     , CASE
-        WHEN account_creation_completed_csr <> ''
-          AND account_creation_completed_csr NOT LIKE 'ECOMM1%'
-            THEN COALESCE(NULLIF(account_csr_full_name, ''), UPPER(LTRIM(RTRIM(account_creation_completed_csr))))
+        WHEN ActivationCTE.account_creation_completed_csr <> ''
+          AND ActivationCTE.account_creation_completed_csr NOT LIKE 'ECOMM1%'
+            THEN COALESCE(
+                     NULLIF(ActivationCTE.account_csr_full_name, '')
+                     , nm.resolved_full_name
+                     , UPPER(LTRIM(RTRIM(ActivationCTE.account_creation_completed_csr)))
+                 )
         ELSE 'Customer Self Service'
       END                                        AS Employee
     , CASE
-        WHEN account_creation_completed_csr <> ''
-          AND account_creation_completed_csr NOT LIKE 'ECOMM1%'
-            THEN COALESCE(NULLIF(account_csr_supervisor_name, ''), 'OTHER')
+        WHEN ActivationCTE.account_creation_completed_csr <> ''
+          AND ActivationCTE.account_creation_completed_csr NOT LIKE 'ECOMM1%'
+            THEN COALESCE(NULLIF(ActivationCTE.account_csr_supervisor_name, ''), 'OTHER')
         ELSE 'Customer Self Service'
       END                                        AS Supervisor
     , COUNT(*)                                   AS Total
 FROM ActivationCTE
+LEFT JOIN #csr_name_map nm
+    ON nm.account_creation_completed_csr = ActivationCTE.account_creation_completed_csr
 WHERE rn = 1
   AND ActivationDate > '2018-01-01'
 GROUP BY
     ActivationDate
-    , account_creation_completed_csr
-    , account_csr_department
-    , account_csr_full_name
-    , account_csr_supervisor_name
+    , ActivationCTE.account_creation_completed_csr
+    , ActivationCTE.account_csr_department
+    , ActivationCTE.account_csr_full_name
+    , ActivationCTE.account_csr_supervisor_name
+    , nm.resolved_full_name
 
 UNION ALL
 
@@ -182,35 +207,42 @@ SELECT
     EventDate                                    AS Date
     , 'Initiation'                               AS DateType
     , CASE
-        WHEN account_creation_completed_csr <> ''
-          AND account_creation_completed_csr NOT LIKE 'ECOMM1%'
+        WHEN InitiationCTE.account_creation_completed_csr <> ''
+          AND InitiationCTE.account_creation_completed_csr NOT LIKE 'ECOMM1%'
             THEN CASE
-                    WHEN account_csr_department = '' THEN 'Community Agents & Other'
-                    ELSE account_csr_department
+                    WHEN InitiationCTE.account_csr_department = '' THEN 'Community Agents & Other'
+                    ELSE InitiationCTE.account_csr_department
                  END
         ELSE 'Customer Self Service'
       END                                        AS CostCenter
     , CASE
-        WHEN account_creation_completed_csr <> ''
-          AND account_creation_completed_csr NOT LIKE 'ECOMM1%'
-            THEN COALESCE(NULLIF(account_csr_full_name, ''), UPPER(LTRIM(RTRIM(account_creation_completed_csr))))
+        WHEN InitiationCTE.account_creation_completed_csr <> ''
+          AND InitiationCTE.account_creation_completed_csr NOT LIKE 'ECOMM1%'
+            THEN COALESCE(
+                     NULLIF(InitiationCTE.account_csr_full_name, '')
+                     , nm.resolved_full_name
+                     , UPPER(LTRIM(RTRIM(InitiationCTE.account_creation_completed_csr)))
+                 )
         ELSE 'Customer Self Service'
       END                                        AS Employee
     , CASE
-        WHEN account_creation_completed_csr <> ''
-          AND account_creation_completed_csr NOT LIKE 'ECOMM1%'
-            THEN COALESCE(NULLIF(account_csr_supervisor_name, ''), 'OTHER')
+        WHEN InitiationCTE.account_creation_completed_csr <> ''
+          AND InitiationCTE.account_creation_completed_csr NOT LIKE 'ECOMM1%'
+            THEN COALESCE(NULLIF(InitiationCTE.account_csr_supervisor_name, ''), 'OTHER')
         ELSE 'Customer Self Service'
       END                                        AS Supervisor
     , COUNT(*)                                   AS Total
 FROM InitiationCTE
+LEFT JOIN #csr_name_map nm
+    ON nm.account_creation_completed_csr = InitiationCTE.account_creation_completed_csr
 WHERE rn = 1
 GROUP BY
     EventDate
-    , account_creation_completed_csr
-    , account_csr_department
-    , account_csr_full_name
-    , account_csr_supervisor_name
+    , InitiationCTE.account_creation_completed_csr
+    , InitiationCTE.account_csr_department
+    , InitiationCTE.account_csr_full_name
+    , InitiationCTE.account_csr_supervisor_name
+    , nm.resolved_full_name
 
 UNION ALL
 
@@ -233,6 +265,7 @@ SELECT
           AND ued.account_creation_completed_csr NOT LIKE 'ECOMM1%'
             THEN COALESCE(
                      NULLIF(ued.account_csr_full_name, '')
+                     , nm.resolved_full_name
                      , UPPER(LTRIM(RTRIM(ued.account_creation_completed_csr)))
                  )
         ELSE 'Customer Self Service'
@@ -246,6 +279,7 @@ SELECT
     , COUNT(DISTINCT ib.party_anchor_id)         AS Total
 FROM #inforce_base ib
 LEFT JOIN #creation_csr ued ON ued.DATA_1 = ib.user_name
+LEFT JOIN #csr_name_map nm  ON nm.account_creation_completed_csr = ued.account_creation_completed_csr
 GROUP BY
     CASE
         WHEN ISNULL(ued.account_creation_completed_csr, '') <> ''
@@ -258,6 +292,7 @@ GROUP BY
           AND ued.account_creation_completed_csr NOT LIKE 'ECOMM1%'
             THEN COALESCE(
                      NULLIF(ued.account_csr_full_name, '')
+                     , nm.resolved_full_name
                      , UPPER(LTRIM(RTRIM(ued.account_creation_completed_csr)))
                  )
         ELSE 'Customer Self Service'
@@ -293,6 +328,7 @@ SELECT
           AND ued.account_creation_completed_csr NOT LIKE 'ECOMM1%'
             THEN COALESCE(
                      NULLIF(ued.account_csr_full_name, '')
+                     , nm.resolved_full_name
                      , UPPER(LTRIM(RTRIM(ued.account_creation_completed_csr)))
                  )
         ELSE 'Customer Self Service'
@@ -306,6 +342,7 @@ SELECT
     , COUNT(DISTINCT ib.party_anchor_id)         AS Total
 FROM #inforce_base ib
 LEFT JOIN #creation_csr ued ON ued.DATA_1 = ib.user_name
+LEFT JOIN #csr_name_map nm  ON nm.account_creation_completed_csr = ued.account_creation_completed_csr
 -- DriverOnly filter: require a positive DR signal in vw_policy_driver.
 -- NOT EXISTS was tested but over-counts: parties absent from vw_policy_driver are NOT
 -- necessarily DR — vw_policy_driver has ~13% coverage gap vs CIFDM.fact_person_coverage.
@@ -334,6 +371,7 @@ GROUP BY
           AND ued.account_creation_completed_csr NOT LIKE 'ECOMM1%'
             THEN COALESCE(
                      NULLIF(ued.account_csr_full_name, '')
+                     , nm.resolved_full_name
                      , UPPER(LTRIM(RTRIM(ued.account_creation_completed_csr)))
                  )
         ELSE 'Customer Self Service'

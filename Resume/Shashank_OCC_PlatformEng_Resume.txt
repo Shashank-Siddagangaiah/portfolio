@@ -1,0 +1,190 @@
+SHASHANK SIDDAGANGAIAH
+Email: Shashanksidhanth@gmail.com | Mobile: 773-517-4837 | LinkedIn
+
+================================================================================
+PROFESSIONAL SUMMARY
+================================================================================
+Platform Engineering Manager with 9+ years of experience leading cross-functional
+engineering teams and delivering cloud-native developer tooling, self-service
+platforms, and infrastructure automation across insurance, healthcare, and
+e-commerce. Proven track record acting as Product Owner for internal developer
+platforms — defining DevX roadmaps, managing sprint backlogs, and engaging
+engineering teams as internal customers to drive adoption of developer tooling.
+Experienced with Backstage IDP, GitOps workflows, Kubernetes, GitHub Actions, and
+AWS infrastructure.
+
+================================================================================
+TECHNICAL SKILLS
+================================================================================
+Developer Experience & IDP:
+  Backstage (service catalog, software templates/Scaffolder, plugin development,
+  TechDocs), Internal Developer Portals (IDP), golden-path templates, self-service
+  developer workflows, service onboarding automation
+
+GitOps & CI/CD:
+  GitHub Actions, Jenkins, ArgoCD, GitOps (Git-based infrastructure delivery),
+  CI/CD pipeline design, trunk-based development
+
+Container & Orchestration:
+  Kubernetes (K8s), Helm, Docker, EKS, microservice orchestration,
+  RBAC, container security
+
+Cloud & Infrastructure:
+  AWS (EC2, VPC, Security Groups, IAM, KMS, S3, Lambda, Kinesis, Glue,
+  Redshift, EMR), Microsoft Azure (Synapse, Data Factory), AWS CLI
+
+Observability & Monitoring:
+  Prometheus, Grafana, Datadog, Splunk, ELK Stack (Elasticsearch / Logstash /
+  Kibana), PagerDuty, SLA/SLO monitoring
+
+Languages:
+  Python, TypeScript / Node.js, SQL (PostgreSQL, T-SQL), Java, Scala
+
+Leadership & Product Ownership:
+  Agile, Scrum, Product Owner, Technical Roadmapping, Backlog Management,
+  Sprint Planning & Reviews, Developer Advocacy, Stakeholder Engagement,
+  Hiring & Performance Management
+
+Data & Integration:
+  Snowflake, Databricks, Apache Kafka, Apache Spark, Power BI, Tableau
+
+================================================================================
+PROFESSIONAL EXPERIENCE
+================================================================================
+
+PEMCO Insurance / Bourntec Solutions | Chicago, IL
+Platform Engineering Lead / AI Engineer | July 2025 - Present
+
+- Owned the 1-to-3-year platform engineering roadmap as Product Owner — managed
+  backlog prioritization, led sprint planning and reviews, and engaged engineering
+  teams as internal customers to align tooling investments with business goals.
+
+- Configured and extended Backstage IDP service catalog to centralize ownership
+  metadata for 50+ microservices and data services; improved service discoverability
+  and reduced developer onboarding time by 30% through standardized catalog-info
+  YAML and component tagging.
+
+- Built self-service software templates in Backstage Scaffolder to standardize
+  project scaffolding, CI/CD pipeline wiring, and cloud resource provisioning —
+  reducing time-to-first-deploy for new services and codifying organizational
+  best practices as golden-path templates.
+
+- Designed API-first data microservices enabling self-service access patterns for
+  internal engineering teams, improving data accuracy by 25% through standardized
+  interfaces and automated schema validation.
+
+- Orchestrated end-to-end platform infrastructure across Microsoft Fabric and
+  Databricks, ensuring 99.9% availability and enforcing SLA compliance for
+  critical engineering workloads.
+
+- Engineered automated GitHub Actions workflows for CI/CD pipeline orchestration,
+  cutting deployment latency by 30% through parallelized build, test, and release
+  automation aligned with GitOps delivery practices.
+
+- Integrated and operationalized an existing Customer Lifetime Value (CLV) model
+  using Python and Databricks; performed customer segmentation and churn-risk
+  analysis on model outputs to identify at-risk policyholders, surface retention
+  signals, and deliver actionable recommendations to business stakeholders aimed
+  at improving customer retention and maximizing long-term policyholder value.
+
+--------------------------------------------------------------------------------
+
+Kemper Insurance / Bourntec Solutions | Chicago, IL
+Platform Engineering Manager | Aug 2023 – July 2025
+
+- Managed 8 direct reports (Platform and Data Engineers) in an Agile environment;
+  owned hiring, quarterly performance reviews, OKRs, and technical mentorship as
+  engineering manager for the Developer Experience pod.
+
+- Acted as Product Owner for the internal developer platform — ran sprint backlog
+  grooming, led sprint planning and retrospectives, and gathered requirements from
+  8 engineering teams as internal customers to prioritize tooling adoption.
+
+- Implemented GitHub Actions CI/CD pipelines and GitOps-based delivery workflows
+  across engineering teams, standardizing application delivery through Git-based
+  automation and reducing deployment lead time by 40%.
+
+- Integrated Prometheus and Grafana monitoring dashboards into the developer
+  workflow, providing real-time visibility into system health, pipeline reliability,
+  and SLA compliance across the platform.
+
+- Built reusable self-service platform libraries and pipeline components in Python,
+  reducing development effort by 25% and driving golden-path adoption across 6
+  engineering teams — tracked via internal NPS and ticket-volume metrics.
+
+- Led enterprise-wide modernization of 70+ legacy reporting tools to self-service
+  Power BI pipelines, cutting licensing costs by 40% and improving stakeholder
+  adoption through structured developer onboarding programs.
+
+- Enforced Kubernetes RBAC policies and least-privilege IAM roles to align
+  platform security posture with enterprise compliance requirements (HIPAA, GDPR).
+
+- Led a cross-functional report rationalization initiative — built an internal
+  application to programmatically analyze 14,000+ MicroStrategy reports via API,
+  applying SQL query complexity scoring and attribute/cube dependency weighting
+  to reduce the active report catalog from 14,000+ to ~600 core reports;
+  compressed a projected 6-month effort into 6 weeks.
+
+--------------------------------------------------------------------------------
+
+Select Rehabilitation | Chicago, IL
+Platform / Infrastructure Engineer | May 2022 – Aug 2023
+
+- Deployed and managed containerized microservice infrastructure using Docker and
+  Kubernetes on AWS, improving deployment automation, scalability, and operational
+  reliability for healthcare data workloads.
+
+- Built GitHub Actions pipelines for automated testing, container image builds,
+  and environment deployments, establishing CI/CD best practices and GitOps
+  delivery patterns across the engineering organization.
+
+- Leveraged AWS infrastructure services (EC2, VPC, Security Groups, IAM) to
+  provision and secure cloud environments, enforcing network isolation and
+  least-privilege access for HIPAA-regulated workloads.
+
+- Designed scalable ETL/ELT pipelines using Azure Data Factory, Databricks, and
+  AWS Glue, integrating data streams with real-time operational reporting.
+
+- Migrated 100+ IBM Cognos BI reports to an in-house Python-based platform,
+  cutting reporting costs by 20% and improving delivery speed for internal teams.
+
+--------------------------------------------------------------------------------
+
+Amazon (Pricing Analytics & Amazon Fresh) | Bangalore, India
+Senior Pricing Data Analyst | May 2016 – Dec 2020
+
+- Partnered with Product Managers, Software Engineers, and Data Scientists to
+  design platform data architectures supporting global expansion of Amazon Fresh
+  (US, UK, Japan, Germany).
+
+- Developed automated Python-based backend services and analytics pipelines for
+  internal engineering teams, improving data refresh efficiency by 30% and
+  enabling near-real-time business insights.
+
+- Delivered executive-facing Tableau dashboards for Weekly Business Reporting
+  (WBR) consumed by leadership across 22+ business categories.
+
+--------------------------------------------------------------------------------
+
+Amazon Pay Team | Bangalore, India
+Business / Data Analyst | May 2016 – Dec 2020
+
+- Leveraged AWS Redshift and advanced SQL to manage large-scale datasets supporting
+  cross-team engineering needs.
+
+- Led a large-scale refund-tracking initiative during COVID-19, consolidating
+  fragmented data via APIs to reduce customer service contacts by 90%+
+  (3,000 to 200 per week).
+
+================================================================================
+CERTIFICATIONS
+================================================================================
+- AWS Certified Data Engineer – Associate
+- Tableau Desktop Specialist
+- (Pursuing) AWS Certified DevOps Engineer – Professional
+
+================================================================================
+EDUCATION
+================================================================================
+MS in Business Analytics, GPA 3.9
+University of Illinois Chicago, Chicago, IL | Jan 2021 – May 2022

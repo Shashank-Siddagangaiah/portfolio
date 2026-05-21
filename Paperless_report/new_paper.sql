@@ -135,14 +135,14 @@ select
         when min(case when d.output_document_type_code = 'BIL' then d.paper_notify_indicator end)  = 0    then 'Y'
         when min(case when d.output_document_type_code = 'BIL' then d.paper_notify_indicator end) is null then null
         else 'N'
-    end                                                                              as Paperless_Bil_Ind,
-    max(case when d.output_document_type_code = 'BIL' then d.effective_from_date end) as PaperlessBillDate,
+    end                                                                              as paperless_bil_ind,
+    max(case when d.output_document_type_code = 'BIL' then d.effective_from_date end) as paperless_bill_date,
     case
         when min(case when d.output_document_type_code = 'POL' then d.paper_notify_indicator end)  = 0    then 'Y'
         when min(case when d.output_document_type_code = 'POL' then d.paper_notify_indicator end) is null then null
         else 'N'
-    end                                                                              as Paperless_Pol_Ind,
-    max(case when d.output_document_type_code = 'POL' then d.effective_from_date end) as PaperlessPolDate
+    end                                                                              as paperless_pol_ind,
+    max(case when d.output_document_type_code = 'POL' then d.effective_from_date end) as paperless_pol_date
 into #cif_detail
 from (
     select
@@ -492,10 +492,10 @@ select
     src.mailing_address_zip_code    as Zip,
     src.original_effective_date,
     -- CIF paperless indicators (AWM — primary source of truth)
-    src.Paperless_Bil_Ind,
-    src.PaperlessBillDate,
-    src.Paperless_Pol_Ind,
-    src.PaperlessPolDate,
+    src.paperless_bil_ind,
+    src.paperless_bill_date,
+    src.paperless_pol_ind,
+    src.paperless_pol_date,
     -- EDW paperless indicators (supplementary — from vw_policy_additional_information)
     src.edw_paperless_pol_ind,
     src.edw_paperless_bil_ind,
@@ -532,10 +532,10 @@ from (
     select
         b.*,
         -- CIF paperless indicators (Step 4)
-        cif.Paperless_Bil_Ind,
-        cif.PaperlessBillDate,
-        cif.Paperless_Pol_Ind,
-        cif.PaperlessPolDate,
+        cif.paperless_bil_ind,
+        cif.paperless_bill_date,
+        cif.paperless_pol_ind,
+        cif.paperless_pol_date,
         -- Policy metadata (Step 9)
         pai.policy_symbol_code,
         pai.edw_paperless_pol_ind,
@@ -607,8 +607,8 @@ select
     sum(case when EmailSource = 'BIM'       then 1 else 0 end)         as bim_fallback_used,
     sum(case when EmailSource = 'AWM'       then 1 else 0 end)         as awm_email,
     sum(case when EmailAddress is null      then 1 else 0 end)         as no_email,
-    sum(case when Paperless_Bil_Ind = 'Y'  then 1 else 0 end)         as paperless_bill_y,
-    sum(case when Paperless_Pol_Ind = 'Y'  then 1 else 0 end)         as paperless_pol_y,
+    sum(case when paperless_bil_ind = 'Y'  then 1 else 0 end)         as paperless_bill_y,
+    sum(case when paperless_pol_ind = 'Y'  then 1 else 0 end)         as paperless_pol_y,
     sum(case when PolicyStatus = 'INFORCE' then 1 else 0 end)         as inforce_count
 from #New_Paper_Report
 ;

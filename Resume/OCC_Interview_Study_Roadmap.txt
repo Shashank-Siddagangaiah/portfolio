@@ -1,0 +1,242 @@
+================================================================================
+OCC INTERVIEW STUDY ROADMAP
+Manager, Platform Engineering - Developer Experience
+================================================================================
+Goal: Fill skill gaps before OCC interviews. Prioritized by what OCC asked for
+      most explicitly in the job description.
+
+Estimated total study time: 3-4 weeks (1-2 hrs/day)
+
+--------------------------------------------------------------------------------
+PRIORITY 1: BACKSTAGE IDP  [~8-10 hours]  *** HIGHEST PRIORITY ***
+--------------------------------------------------------------------------------
+Why: OCC listed Backstage experience explicitly. Your resume claims it but
+     you need to be able to speak concretely in interviews.
+
+Core concepts to know:
+  - Service catalog: catalog-info.yaml structure, entity kinds (Component, API, System, Domain, Group, User)
+  - Software Templates / Scaffolder: building templates, actions, parameters
+  - TechDocs: MkDocs-based documentation site generator
+  - Plugins: frontend (React/TypeScript) and backend (Node.js/Express) plugin anatomy
+  - Deployment: Docker Compose or Kubernetes (Helm chart available)
+  - Golden-path templates: what they are and why they matter
+
+YouTube:
+  - TeKanAid full Backstage playlist (most complete beginner-to-production series):
+    https://www.youtube.com/@TeKanAid/search?query=backstage
+  - Backstage.io - Build Your Own Developer Portal (10 min overview):
+    https://www.youtube.com/watch?v=85TQEpNCaU0
+  - Backstage IDP Tutorial - Getting Started (TechWorld with Nana):
+    https://www.youtube.com/watch?v=rRnkMX7MsVQ
+
+Official Docs:
+  - https://backstage.io/docs/overview/what-is-backstage
+  - https://backstage.io/docs/features/software-catalog/
+  - https://backstage.io/docs/features/software-templates/
+  - https://backstage.io/docs/features/techdocs/
+  - https://backstage.io/docs/plugins/
+
+Hands-on:
+  Run Backstage locally: npx @backstage/create-app@latest
+  Create one Software Template end-to-end (even a simple one = good talking point)
+
+Interview talking points to prepare:
+  - "How did you configure the service catalog at PEMCO/Kemper?"
+  - "What custom plugins or templates did you build?"
+  - "How do you handle access control / RBAC in Backstage?"
+
+--------------------------------------------------------------------------------
+PRIORITY 2: ARGOCD + GITOPS  [~5-6 hours]
+--------------------------------------------------------------------------------
+Why: OCC does GitOps heavily. ArgoCD is the standard tool. You know GitOps
+     conceptually but need to be able to speak to ArgoCD specifics.
+
+Core concepts to know:
+  - GitOps principles: declarative config, Git as source of truth, reconciliation loop
+  - ArgoCD architecture: API server, repo server, application controller, Dex
+  - Application CRD: spec.source, spec.destination, spec.syncPolicy
+  - Sync policies: automatic vs manual, self-heal, prune
+  - App of Apps pattern (managing multiple applications)
+  - ApplicationSet: templating multiple ArgoCD apps
+  - Difference between push-based CI/CD (Jenkins/GHA) vs pull-based (ArgoCD)
+
+YouTube:
+  - ArgoCD Tutorial for Beginners - TechWorld with Nana (full course, ~2hrs):
+    https://www.youtube.com/watch?v=MeU5_k9ssrs
+  - GitHub Actions + GitOps + Kubernetes (2025, end-to-end pipeline):
+    https://www.youtube.com/watch?v=Gz3rFMkRx1k
+  - ArgoCD Application of Applications Pattern:
+    https://www.youtube.com/watch?v=HoGeqVFb8CE
+
+Official Docs:
+  - https://argo-cd.readthedocs.io/en/stable/
+  - https://argo-cd.readthedocs.io/en/stable/operator-manual/application-set/
+
+Interview talking points to prepare:
+  - "How does ArgoCD differ from Jenkins/GitHub Actions?"
+  - "What is the App of Apps pattern and when would you use it?"
+  - "How do you handle secrets in a GitOps workflow?"
+
+--------------------------------------------------------------------------------
+PRIORITY 3: GITHUB ACTIONS - ADVANCED  [~4-5 hours]
+--------------------------------------------------------------------------------
+Why: You have this in your resume and can speak to basics. OCC wants depth --
+     reusable workflows, composite actions, OIDC auth, matrix builds.
+
+Core concepts to know (beyond basics):
+  - Reusable workflows: workflow_call trigger, inputs, secrets, outputs
+  - Composite actions: action.yml with multiple steps
+  - OIDC-based AWS authentication (no long-lived secrets needed)
+  - Matrix strategy: build across multiple OS/versions in parallel
+  - Environments and required reviewers for deploy gates
+  - Self-hosted runners
+  - GitHub Actions with Kubernetes (kubectl, Helm deploy steps)
+
+YouTube:
+  - GitHub Actions BEGINNER to PRO (full course, 3.5 hrs):
+    https://www.youtube.com/watch?v=TLB5MY9BBa4
+  - GitHub Actions CI/CD from Scratch (2026):
+    https://www.youtube.com/watch?v=scEDHsr3APg
+  - GitHub Actions Reusable Workflows (deep dive):
+    https://www.youtube.com/watch?v=lRypYtmbKMs
+
+Official Docs:
+  - https://docs.github.com/en/actions/using-workflows/reusing-workflows
+  - https://docs.github.com/en/actions/creating-actions/creating-a-composite-action
+  - https://docs.github.com/en/actions/deployment/security-hardening-your-deployments/configuring-openid-connect-in-amazon-web-services
+
+Interview talking points to prepare:
+  - "Walk me through a reusable workflow you built."
+  - "How do you secure secrets in GitHub Actions pipelines?"
+  - "How would you implement a GitOps delivery pattern using GHA + ArgoCD?"
+
+--------------------------------------------------------------------------------
+PRIORITY 4: HELM  [~3-4 hours]
+--------------------------------------------------------------------------------
+Why: You have Kubernetes experience. Helm is how you package and deploy to K8s
+     in production. OCC will expect this as table-stakes for a Platform Eng manager.
+
+Core concepts to know:
+  - Chart structure: Chart.yaml, values.yaml, templates/, helpers.tpl
+  - Template functions: {{ .Values.x }}, {{ include }}, {{ tpl }}
+  - Overriding values: -f values.yaml, --set key=value
+  - Helm hooks: pre-install, post-upgrade, etc.
+  - Helm test: verifying deployments
+  - Managing releases: helm install, upgrade, rollback, history
+  - Helm with ArgoCD: deploying Helm charts via GitOps
+
+YouTube:
+  - Helm Kubernetes Package Manager (TechWorld with Nana, full course, ~2hrs):
+    https://www.youtube.com/watch?v=-ykwb1d0DXU
+  - Kubernetes Package Manager - CKA Course 2025 section:
+    https://www.youtube.com/watch?v=w51LMOlxhfM
+  - Helm Charts from Scratch to Production:
+    https://www.youtube.com/watch?v=jUYNS90nq8U
+
+Official Docs:
+  - https://helm.sh/docs/intro/quickstart/
+  - https://helm.sh/docs/chart_template_guide/
+
+Hands-on:
+  helm create myapp
+  Modify templates/deployment.yaml to use values.yaml variables
+  helm install myapp ./myapp --dry-run --debug
+
+--------------------------------------------------------------------------------
+PRIORITY 5: PLATFORM ENGINEERING CONCEPTS  [~3 hours reading]
+--------------------------------------------------------------------------------
+Why: OCC wants a Platform Engineering LEADER. You need to speak the language:
+     Team Topologies, platform as product, DORA metrics, DevEx measurement.
+
+Core concepts to know:
+  - Team Topologies: Stream-aligned, Enabling, Platform, Complicated-subsystem teams
+  - Platform as a Product: treating internal developers as customers, NPS, CSAT
+  - DORA Metrics: Deployment Frequency, Lead Time, MTTR, Change Failure Rate
+  - Developer Experience (DevEx): cognitive load reduction, feedback loops, flow state
+  - Internal Developer Portal (IDP) vs Internal Developer Platform (also IDP)
+  - Paved paths / golden paths: opinionated, pre-approved patterns
+  - How to measure platform adoption: template usage, onboarding time, DORA
+
+Reading / Articles:
+  - Team Topologies summary:
+    https://teamtopologies.com/key-concepts
+  - DORA metrics explained (Google DevOps Research):
+    https://dora.dev/guides/dora-metrics-four-keys/
+  - What is an Internal Developer Portal (Backstage blog):
+    https://backstage.io/blog/2024/01/what-is-an-internal-developer-portal
+  - Platform Engineering weekly newsletter:
+    https://platformweekly.com/
+
+YouTube:
+  - Platform Engineering - What It Is and Why It Matters:
+    https://www.youtube.com/watch?v=ghzsBm8vOms
+  - DORA Metrics Deep Dive:
+    https://www.youtube.com/watch?v=Hv5-DlgNQak
+
+Interview talking points to prepare:
+  - "How do you measure the success of a developer platform?"
+  - "How do you get engineering teams to adopt platform tooling vs build their own?"
+  - "What does 'treating the platform as a product' mean to you?"
+
+--------------------------------------------------------------------------------
+PRIORITY 6: KUBERNETES (DEPTH)  [~2-3 hours, only if time permits]
+--------------------------------------------------------------------------------
+You already have this on your resume with real experience. Refresh on:
+  - RBAC deep dive: Roles, ClusterRoles, RoleBindings, ServiceAccounts
+  - Pod Security Admission / Pod Security Standards (replacing PodSecurityPolicy)
+  - Resource requests and limits / Horizontal Pod Autoscaler
+  - Network Policies (namespace isolation)
+  - Kubernetes operators concept (CRD + controller pattern)
+
+YouTube:
+  - Kubernetes RBAC Explained:
+    https://www.youtube.com/watch?v=jvhKOAyD8S8
+  - Kubernetes Security Best Practices (TechWorld with Nana):
+    https://www.youtube.com/watch?v=oBf5lrmquYI
+
+--------------------------------------------------------------------------------
+QUICK REFERENCE: SKILLS GAP SUMMARY
+--------------------------------------------------------------------------------
+
+IN YOUR RESUME (need to deepen):
+  [x] Backstage IDP      -- can describe catalog + templates, needs hands-on depth
+  [x] GitHub Actions     -- solid basics, needs reusable workflows + OIDC
+  [x] Kubernetes / EKS   -- solid, refresh RBAC and Pod Security
+  [x] AWS                -- solid, no gaps
+
+GAPS TO FILL BEFORE INTERVIEW:
+  [ ] ArgoCD             -- not in your resume at all, OCC expects this
+  [ ] Helm               -- listed but no concrete stories; build one chart
+  [ ] DORA Metrics       -- add to vocabulary and be ready to cite them
+  [ ] Platform as Product mindset -- read Team Topologies key concepts
+
+ALREADY STRONG (no study needed):
+  [x] Python             -- demonstrated with real projects
+  [x] SQL / data pipelines -- deep experience at Amazon, Select Rehab, PEMCO
+  [x] CI/CD concepts     -- Jenkins, GitHub Actions, GitOps strategy
+  [x] Observability      -- Prometheus, Grafana, Datadog, Splunk
+
+--------------------------------------------------------------------------------
+INTERVIEW PREP: 5 BEHAVIORAL STORIES TO HAVE READY
+--------------------------------------------------------------------------------
+Use STAR format (Situation, Task, Action, Result)
+
+1. Product Owner story: sprint planning, backlog grooming, gathering requirements
+   from engineering teams as "customers"
+   => Use Kemper Developer Experience pod experience
+
+2. Platform adoption story: how you got resistant teams to adopt platform tooling
+   => Use Kemper golden-path pipeline libraries (25% effort reduction, NPS tracking)
+
+3. Service catalog / Backstage story: what you built, metrics, before/after
+   => Use PEMCO 50+ microservices catalog, 30% onboarding reduction
+
+4. Developer experience improvement story: reduced friction, measured impact
+   => Use Kemper deployment lead time (-40%) and onboarding programs
+
+5. Cross-functional alignment story: aligning platform investments with business goals
+   => Use either PEMCO roadmap ownership or Kemper enterprise BI modernization
+
+================================================================================
+Good luck with the OCC interviews!
+================================================================================
