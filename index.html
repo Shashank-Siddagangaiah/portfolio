@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shashank Siddagangaiah | Lead AI &amp; Data Engineer</title>
+  <meta name="description" content="Lead AI &amp; Data Engineer with 10+ years building production AI systems, RAG pipelines, dbt-powered data platforms, and Agentic AI frameworks at multi-TB scale across insurance, healthcare, and e-commerce." />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet" />
+  <!-- Open Graph / Social Sharing -->
+  <meta property="og:type"        content="website" />
+  <meta property="og:url"         content="https://shashank-siddagangaiah.github.io/portfolio/" />
+  <meta property="og:title"       content="Shashank Siddagangaiah | Lead AI &amp; Data Engineer" />
+  <meta property="og:description" content="Lead AI &amp; Data Engineer · 10+ years · Chicago, IL. Building production Agentic AI systems, RAG pipelines, and Medallion lakehouses end-to-end. Databricks Certified GenAI Engineer." />
+  <meta property="og:image"       content="https://shashank-siddagangaiah.github.io/portfolio/profile_github.jpg" />
+  <meta name="twitter:card"        content="summary_large_image" />
+  <meta name="twitter:title"       content="Shashank Siddagangaiah | Lead AI &amp; Data Engineer" />
+  <meta name="twitter:description" content="Lead AI &amp; Data Engineer · 10+ years. Agentic AI, RAG pipelines, Databricks, dbt, Snowflake. Open to Senior AI / Staff DE roles." />
+  <meta name="twitter:image"       content="https://shashank-siddagangaiah.github.io/portfolio/profile_github.jpg" />
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <div class="nav-inner">
+    <span class="nav-logo">SS<span class="dot">.</span></span>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#education">Credentials</a></li>
+      <li><a href="#contact" class="btn-nav">Contact</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- MOBILE DRAWER -->
+<div class="mobile-drawer" id="mobileDrawer">
+  <ul>
+    <li><a href="#about" class="drawer-link">About</a></li>
+    <li><a href="#skills" class="drawer-link">Skills</a></li>
+    <li><a href="#experience" class="drawer-link">Experience</a></li>
+    <li><a href="#projects" class="drawer-link">Projects</a></li>
+    <li><a href="#education" class="drawer-link">Credentials</a></li>
+    <li><a href="#contact" class="drawer-link">Contact</a></li>
+  </ul>
+</div>
+
+<!-- HERO -->
+<section id="hero">
+  <canvas id="canvas"></canvas>
+  <div class="hero-content">
+    <div class="otw-badge">
+      <span class="otw-dot"></span>
+      Open to Work — Senior AI / Staff Data Engineer Roles
+    </div>
+    <p class="hero-greeting">Hi, I'm</p>
+    <h1 class="hero-name">Shashank<br/><span class="accent">Siddagangaiah</span></h1>
+    <p class="hero-role">
+      <span id="typed"></span><span class="cursor">|</span>
+    </p>
+    <p class="hero-summary">
+      Full-stack ownership from <strong>ingestion to inference</strong> — designing the Medallion
+      lakehouse, the dbt models that structure it, and the LangChain agents and RAG pipelines
+      that reason over it. <strong>10+ years</strong> across insurance, healthcare, and e-commerce at multi-TB scale.
+    </p>
+    <div class="hero-cta">
+      <a href="#experience" class="btn-primary">View My Work</a>
+      <a href="#contact" class="btn-secondary">Get in Touch</a>
+      <a href="https://www.linkedin.com/in/shashank-siddagangaiah" target="_blank" rel="noopener" class="btn-download">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3"/></svg>
+        Resume
+      </a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat">
+        <span class="stat-num" data-target="10">0</span><span class="stat-suffix">+</span>
+        <p>Years Experience</p>
+      </div>
+      <div class="stat">
+        <span class="stat-num" data-target="150">0</span><span class="stat-suffix">+</span>
+        <p>dbt Models Built</p>
+      </div>
+      <div class="stat">
+        <span class="stat-num" data-target="35">0</span><span class="stat-suffix">%</span>
+        <p>Latency Reduced</p>
+      </div>
+      <div class="stat">
+        <span class="stat-num" data-target="99">0</span><span class="stat-suffix">%</span>
+        <p>Pipeline Uptime</p>
+      </div>
+    </div>
+  </div>
+  <div class="scroll-indicator">
+    <div class="scroll-line"></div>
+    <span>Scroll</span>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <p class="section-label">// about me</p>
+    <h2 class="section-title">Who I Am</h2>
+    <div class="about-grid">
+      <div class="about-text">
+        <p>
+          I'm a <strong>Lead AI &amp; Data Engineer</strong> based in <strong>Chicago, IL</strong>,
+          specializing in building production AI systems that sit on top of enterprise-grade data
+          platforms I design myself — full-stack ownership from ingestion to inference.
+        </p>
+        <p>
+          At <strong>PEMCO Insurance</strong>, I built the Medallion lakehouse, the dbt transformation
+          layer, the MLflow model lifecycle, and the multi-agent LangChain AI system that reasons
+          over all of it. At <strong>Kemper Insurance</strong>, I led a team of 8 engineers and
+          built a 150+ model dbt project on Snowflake from scratch.
+        </p>
+        <p>
+          I hold four industry certifications including the
+          <strong>Databricks Certified Generative AI Engineer</strong>, and I'm currently building
+          <strong>EvoFit</strong> — a full-stack AI fitness platform with RAG pipelines, agentic
+          workout planning, and a dbt-powered data layer.
+        </p>
+        <div class="about-links">
+          <a href="mailto:Shashanksidhanth@gmail.com" class="chip">✉&nbsp; shashanksidhanth@gmail.com</a>
+          <a href="https://github.com/Shashank-Siddagangaiah" target="_blank" rel="noopener" class="chip">&#9670;&nbsp; GitHub</a>
+          <a href="https://www.linkedin.com/in/shashank-siddagangaiah" target="_blank" rel="noopener" class="chip">in&nbsp; LinkedIn</a>
+        </div>
+      </div>
+      <div class="about-card">
+        <div class="profile-badge">
+          <div class="profile-initials">SS</div>
+          <div class="profile-ring ring-1"></div>
+          <div class="profile-ring ring-2"></div>
+          <div class="profile-ring ring-3"></div>
+        </div>
+        <div class="about-details">
+          <div class="detail-row">
+            <span class="detail-label">Location</span>
+            <span>Chicago, IL &nbsp;·&nbsp; Remote Ready</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Current Role</span>
+            <span>Lead AI &amp; Data Engineer</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Company</span>
+            <span>PEMCO Insurance</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Education</span>
+            <span>MS Business Analytics, GPA 3.9</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Status</span>
+            <span class="available">&#9679;&nbsp; Open to Opportunities</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EMPLOYER STRIP -->
+<section id="employers">
+  <div class="container">
+    <p class="strip-label">Experience at &amp; built on</p>
+    <div class="employer-strip">
+      <span class="employer-chip">Amazon</span>
+      <span class="strip-divider">·</span>
+      <span class="employer-chip">PEMCO Insurance</span>
+      <span class="strip-divider">·</span>
+      <span class="employer-chip">Kemper Insurance</span>
+      <span class="strip-divider">·</span>
+      <span class="employer-chip">Select Rehabilitation</span>
+    </div>
+    <div class="tech-badge-strip">
+      <img src="https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=python&logoColor=white" alt="Python" />
+      <img src="https://img.shields.io/badge/Databricks-FF3621?style=flat-square&logo=databricks&logoColor=white" alt="Databricks" />
+      <img src="https://img.shields.io/badge/dbt-FF694B?style=flat-square&logo=dbt&logoColor=white" alt="dbt" />
+      <img src="https://img.shields.io/badge/Snowflake-29B5E8?style=flat-square&logo=snowflake&logoColor=white" alt="Snowflake" />
+      <img src="https://img.shields.io/badge/Apache%20Spark-E25A1C?style=flat-square&logo=apachespark&logoColor=white" alt="Spark" />
+      <img src="https://img.shields.io/badge/Apache%20Kafka-231F20?style=flat-square&logo=apachekafka&logoColor=white" alt="Kafka" />
+      <img src="https://img.shields.io/badge/AWS-FF9900?style=flat-square&logo=amazonaws&logoColor=white" alt="AWS" />
+      <img src="https://img.shields.io/badge/Azure-0078D4?style=flat-square&logo=microsoftazure&logoColor=white" alt="Azure" />
+      <img src="https://img.shields.io/badge/LangChain-1C3C3C?style=flat-square&logoColor=white" alt="LangChain" />
+      <img src="https://img.shields.io/badge/MLflow-0194E2?style=flat-square&logo=mlflow&logoColor=white" alt="MLflow" />
+      <img src="https://img.shields.io/badge/FastAPI-009688?style=flat-square&logo=fastapi&logoColor=white" alt="FastAPI" />
+      <img src="https://img.shields.io/badge/Docker-2496ED?style=flat-square&logo=docker&logoColor=white" alt="Docker" />
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="container">
+    <p class="section-label">// technical skills</p>
+    <h2 class="section-title">What I Build With</h2>
+    <div class="skills-grid">
+
+      <div class="skill-card" data-aos>
+        <div class="skill-icon-wrap">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z"/></svg>
+        </div>
+        <h3>AI &amp; Agentic Engineering</h3>
+        <div class="tags">
+          <span class="tag">LangChain</span><span class="tag">LangGraph</span>
+          <span class="tag">LangSmith</span><span class="tag">Anthropic Claude SDK</span>
+          <span class="tag">OpenAI API</span><span class="tag">RAG</span>
+          <span class="tag">LlamaIndex</span><span class="tag">pgvector</span>
+          <span class="tag">Ragas</span><span class="tag">Databricks Mosaic AI</span>
+          <span class="tag">MLflow</span><span class="tag">LLMOps</span>
+          <span class="tag">Prompt Engineering</span><span class="tag">Tool Calling</span>
+        </div>
+      </div>
+
+      <div class="skill-card" data-aos>
+        <div class="skill-icon-wrap">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2.25 15a4.5 4.5 0 004.5 4.5H18a3.75 3.75 0 001.332-7.257 3 3 0 00-3.758-3.848 5.25 5.25 0 00-10.233 2.33A4.502 4.502 0 002.25 15z"/></svg>
+        </div>
+        <h3>Cloud &amp; Data Platforms</h3>
+        <div class="tags">
+          <span class="tag">Databricks</span><span class="tag">Unity Catalog</span>
+          <span class="tag">Delta Live Tables</span><span class="tag">Auto Loader</span>
+          <span class="tag">AWS (S3, Redshift, EMR, Glue)</span>
+          <span class="tag">Azure Data Factory</span><span class="tag">ADLS Gen2</span>
+          <span class="tag">GCP (BigQuery, Vertex AI)</span>
+          <span class="tag">Snowflake</span><span class="tag">AWS Bedrock</span>
+          <span class="tag">SageMaker</span>
+        </div>
+      </div>
+
+      <div class="skill-card" data-aos>
+        <div class="skill-icon-wrap">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z"/></svg>
+        </div>
+        <h3>Lakehouse &amp; Big Data</h3>
+        <div class="tags">
+          <span class="tag">Apache Spark</span><span class="tag">PySpark</span>
+          <span class="tag">Delta Lake</span><span class="tag">Medallion Architecture</span>
+          <span class="tag">Apache Kafka</span><span class="tag">AWS Kinesis</span>
+          <span class="tag">Apache Iceberg</span><span class="tag">Structured Streaming</span>
+          <span class="tag">Change Data Feed</span><span class="tag">Z-Ordering</span>
+          <span class="tag">Liquid Clustering</span>
+        </div>
+      </div>
+
+      <div class="skill-card" data-aos>
+        <div class="skill-icon-wrap">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.25 6.375c0 2.278-3.694 4.125-8.25 4.125S3.75 8.653 3.75 6.375m16.5 0c0-2.278-3.694-4.125-8.25-4.125S3.75 4.097 3.75 6.375m16.5 0v11.25c0 2.278-3.694 4.125-8.25 4.125s-8.25-1.847-8.25-4.125V6.375m16.5 0v3.75m-16.5-3.75v3.75m16.5 0v3.75C20.25 16.153 16.556 18 12 18s-8.25-1.847-8.25-4.125v-3.75m16.5 0c0 2.278-3.694 4.125-8.25 4.125s-8.25-1.847-8.25-4.125"/></svg>
+        </div>
+        <h3>Data Transformation &amp; Quality</h3>
+        <div class="tags">
+          <span class="tag">dbt Core &amp; Cloud</span>
+          <span class="tag">Kimball Modeling</span><span class="tag">SCD Type 1/2</span>
+          <span class="tag">Great Expectations</span><span class="tag">Soda</span>
+          <span class="tag">CDC / Debezium</span><span class="tag">Schema Tests</span>
+          <span class="tag">Data Lineage</span><span class="tag">Informatica Cloud</span>
+        </div>
+      </div>
+
+      <div class="skill-card" data-aos>
+        <div class="skill-icon-wrap">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17.25 6.75L22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3l-4.5 16.5"/></svg>
+        </div>
+        <h3>Programming &amp; Databases</h3>
+        <div class="tags">
+          <span class="tag">Python</span><span class="tag">FastAPI</span>
+          <span class="tag">Pydantic</span><span class="tag">Pandas</span>
+          <span class="tag">SQL</span><span class="tag">Scala</span><span class="tag">Java</span>
+          <span class="tag">Snowflake SQL</span><span class="tag">PostgreSQL</span>
+          <span class="tag">MongoDB</span><span class="tag">DynamoDB</span>
+          <span class="tag">Supabase</span>
+        </div>
+      </div>
+
+      <div class="skill-card" data-aos>
+        <div class="skill-icon-wrap">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M10.5 6a7.5 7.5 0 107.5 7.5h-7.5V6z"/><path d="M13.5 10.5H21A7.5 7.5 0 0013.5 3v7.5z"/></svg>
+        </div>
+        <h3>DevOps, MLOps &amp; BI</h3>
+        <div class="tags">
+          <span class="tag">Apache Airflow</span><span class="tag">Databricks Asset Bundles</span>
+          <span class="tag">GitHub Actions</span><span class="tag">Docker</span>
+          <span class="tag">Kubernetes (EKS)</span><span class="tag">Jenkins</span>
+          <span class="tag">Tableau</span><span class="tag">Power BI</span>
+          <span class="tag">Looker</span><span class="tag">Grafana</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="container">
+    <p class="section-label">// professional experience</p>
+    <h2 class="section-title">Career Timeline</h2>
+    <div class="timeline">
+
+      <!-- PEMCO -->
+      <div class="timeline-item" data-aos>
+        <div class="timeline-dot current"></div>
+        <div class="timeline-card">
+          <div class="tl-header">
+            <div class="tl-title-block">
+              <h3>Lead AI &amp; Data Engineer</h3>
+              <p class="company">PEMCO Insurance &nbsp;·&nbsp; via Bourntec Solutions &nbsp;·&nbsp; Chicago, IL</p>
+            </div>
+            <span class="tl-badge current">Current</span>
+          </div>
+          <p class="tl-date">July 2025 – Present</p>
+          <ul>
+            <li>Built a production <strong>multi-agent AI system</strong> in Python using LangChain and Databricks Mosaic AI to autonomously analyze Customer Lifetime Value (CLV) — eliminated manual data preparation cycles and improved data linkage accuracy by <strong>25%</strong>.</li>
+            <li>Engineered end-to-end <strong>RAG pipelines</strong> connecting unstructured policy documents to Delta Lake data via Databricks Vector Search, enabling sub-second policy query responses across the enterprise knowledge base.</li>
+            <li>Managed the full <strong>MLflow model lifecycle</strong> — experiment tracking, Databricks model registry, production serving endpoint with 90/10 champion/challenger A/B traffic split and zero-downtime rollouts.</li>
+            <li>Designed the <strong>Medallion (Bronze–Silver–Gold) lakehouse</strong> on Databricks and Azure Data Factory; led dbt adoption — designed architecture, schema tests, CI/CD via DAB and GitHub Actions.</li>
+            <li>Cut pipeline latency <strong>35%</strong> with Auto Loader and Delta Lake tuning (Z-ordering, liquid clustering, AQE) on multi-TB insurance datasets.</li>
+            <li>Maintained <strong>99.9% pipeline uptime</strong> through modular Airflow DAG libraries with smart retry policies, SLA callbacks, and Slack/PagerDuty alerts.</li>
+            <li>Own the <strong>3-year AI and data platform roadmap</strong>; delivered risk-adjusted Power BI and Tableau dashboards cutting executive reporting from 3 days to same-day.</li>
+          </ul>
+          <div class="tl-tags">
+            <span>LangChain</span><span>RAG</span><span>Databricks Mosaic AI</span>
+            <span>Delta Lake</span><span>MLflow</span><span>dbt</span><span>Airflow</span>
+            <span>Azure Data Factory</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- KEMPER -->
+      <div class="timeline-item" data-aos>
+        <div class="timeline-dot"></div>
+        <div class="timeline-card">
+          <div class="tl-header">
+            <div class="tl-title-block">
+              <h3>Data Engineering Manager</h3>
+              <p class="company">Kemper Insurance &nbsp;·&nbsp; via Bourntec Solutions &nbsp;·&nbsp; Chicago, IL</p>
+            </div>
+          </div>
+          <p class="tl-date">Aug 2023 – July 2025</p>
+          <ul>
+            <li>Built and led a cross-functional team of <strong>8 data engineers</strong> — owned hiring, OKRs, performance reviews; grew 3 mid-level engineers to senior and 2 senior engineers to technical leads within 12 months.</li>
+            <li>Reduced production data incidents by <strong>45%</strong> by introducing PR review gates, automated testing, and CI/CD standards — shifted team culture from reactive to proactive quality ownership.</li>
+            <li>Replaced ad-hoc SQL scripts with a <strong>150+ model dbt project on Snowflake</strong> — fully version-controlled, tested, and lineage-documented; data quality incidents dropped 30%.</li>
+            <li>Designed the enterprise <strong>Snowflake data warehouse</strong> using Kimball dimensional modeling — star schemas, SCD Type 1/2, conformed dimensions for TB-scale actuarial analytics.</li>
+            <li>Built real-time streaming pipelines using <strong>Apache Kafka and AWS Kinesis</strong>, sustaining sub-minute end-to-end latency under peak vendor data ingestion loads.</li>
+            <li>Cut overnight batch runtime <strong>40%</strong> by rebuilding Spark jobs on AWS EMR with broadcast joins, partition pruning, and AQE tuning.</li>
+            <li>Enforced HIPAA/GDPR compliance in Snowflake (dynamic masking, row-level security, RBAC); migrated 70+ legacy reports to Power BI and Informatica Cloud — <strong>40% licensing cost reduction</strong>.</li>
+          </ul>
+          <div class="tl-tags">
+            <span>dbt</span><span>Snowflake</span><span>Apache Kafka</span>
+            <span>AWS EMR</span><span>Spark</span><span>Airflow</span><span>Power BI</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- SELECT REHAB -->
+      <div class="timeline-item" data-aos>
+        <div class="timeline-dot"></div>
+        <div class="timeline-card">
+          <div class="tl-header">
+            <div class="tl-title-block">
+              <h3>Senior Data Engineer</h3>
+              <p class="company">Select Rehabilitation &nbsp;·&nbsp; Chicago, IL</p>
+            </div>
+          </div>
+          <p class="tl-date">May 2022 – Aug 2023</p>
+          <ul>
+            <li>Designed and built <strong>ETL/ELT pipelines</strong> for large-scale healthcare claims data using AWS (Glue, EMR, S3), Apache Spark, Python, and MongoDB — HIPAA-compliant incremental loads with automated validation.</li>
+            <li>Improved CMS regulatory reporting data accessibility by <strong>40%</strong> via Airflow-orchestrated pipelines with Jenkins CI/CD for deployments and automated SLA alerting.</li>
+            <li>Containerized data-processing microservices using <strong>Docker and Kubernetes on AWS EKS</strong>; improved scalability and deployment reliability for regulated healthcare workloads.</li>
+            <li>Migrated 100+ IBM Cognos BI reports to an in-house Python analytics platform — <strong>20% cost reduction</strong> and faster delivery for clinical and financial stakeholders.</li>
+          </ul>
+          <div class="tl-tags">
+            <span>AWS Glue</span><span>Apache Spark</span><span>MongoDB</span>
+            <span>Airflow</span><span>Docker</span><span>Kubernetes</span><span>Jenkins</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- AMAZON -->
+      <div class="timeline-item" data-aos>
+        <div class="timeline-dot"></div>
+        <div class="timeline-card">
+          <div class="tl-header">
+            <div class="tl-title-block">
+              <h3>Data Engineer</h3>
+              <p class="company">Amazon &nbsp;·&nbsp; Pricing Analytics, Amazon Fresh &amp; Amazon Pay &nbsp;·&nbsp; Bangalore, India</p>
+            </div>
+          </div>
+          <p class="tl-date">May 2016 – Dec 2020</p>
+          <ul>
+            <li>Designed data architectures and <strong>ML feature pipelines</strong> supporting Amazon Fresh's global expansion across US, UK, Japan, and Germany — owned the data model for 22+ product categories at Amazon scale.</li>
+            <li>Built automated <strong>Python pricing analytics pipelines on AWS</strong> (Redshift, S3) using advanced SQL — improved data refresh efficiency by <strong>30%</strong> enabling near-real-time pricing decisions globally.</li>
+            <li>During COVID-19, led a cross-functional refund-tracking initiative — automated reconciliation pipelines cut customer service contacts from <strong>3,000 to 200 per week (90%+ reduction)</strong>.</li>
+            <li>Delivered executive <strong>Tableau dashboards</strong> for Weekly Business Reporting consumed by senior leadership across the global pricing and grocery portfolio.</li>
+          </ul>
+          <div class="tl-tags">
+            <span>Python</span><span>AWS Redshift</span><span>SQL</span>
+            <span>Tableau</span><span>ML Feature Pipelines</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="container">
+    <p class="section-label">// portfolio project</p>
+    <h2 class="section-title">What I'm Building</h2>
+    <div class="projects-grid">
+
+      <!-- EVOFIT FEATURED -->
+      <div class="project-card featured" data-aos>
+        <div class="project-header">
+          <div class="project-icon-wrap featured-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z"/></svg>
+          </div>
+          <div class="project-badges">
+            <span class="badge-live">Live</span>
+            <span class="badge-featured">Featured</span>
+          </div>
+        </div>
+        <h3>EvoFit — AI-Powered Fitness Platform</h3>
+        <p>Production fitness platform — gym workout logging, sport analytics, yoga session management, habit tracking, and leaderboard. React 18 / TypeScript frontend on a Supabase PostgreSQL backend with Row-Level Security. dbt model layer (staging → intermediate → mart) serves as the clean data contract between the analytics layer and AI agents.</p>
+        <div class="project-highlight">
+          <div class="highlight-item">
+            <span class="highlight-label">App — Live</span>
+            <span>Full fitness tracking suite live at evofit-seven.vercel.app — workout logging, leaderboard, analytics</span>
+          </div>
+          <div class="highlight-item">
+            <span class="highlight-label">AI Agent — In Progress</span>
+            <span>Claude tool-calling Workout Agent reads from dbt mart; RAG Yoga Agent (LlamaIndex + pgvector + Ragas) — architecture defined, UI integration in progress</span>
+          </div>
+          <div class="highlight-item">
+            <span class="highlight-label">Data Layer</span>
+            <span>dbt staging → intermediate → mart with full schema tests, lineage, and data contracts</span>
+          </div>
+        </div>
+        <div class="project-tags">
+          <span>React 18</span><span>TypeScript</span><span>Supabase</span>
+          <span>dbt Core</span><span>pgvector</span><span>LlamaIndex</span>
+          <span>Ragas</span><span>Anthropic Claude SDK</span><span>PostHog</span><span>Vite</span>
+        </div>
+        <div class="project-footer">
+          <a href="https://evofit-seven.vercel.app/" target="_blank" rel="noopener" class="project-link">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"/></svg>
+            View Live App
+          </a>
+          <a href="https://github.com/Shashank-Siddagangaiah" target="_blank" rel="noopener" class="project-link">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+            GitHub
+          </a>
+        </div>
+      </div>
+
+      <!-- ENTERPRISE CLV -->
+      <div class="project-card enterprise" data-aos>
+        <div class="project-header">
+          <div class="project-icon-wrap enterprise-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z"/></svg>
+          </div>
+          <div class="project-badges">
+            <span class="badge-enterprise">Enterprise</span>
+          </div>
+        </div>
+        <h3>CLV Agentic AI Framework &nbsp;—&nbsp; PEMCO Insurance</h3>
+        <p>Production multi-agent AI system where specialized LangChain agents autonomously retrieve, reason over, and synthesize underwriting, pricing, and claims data to analyze Customer Lifetime Value. Built on Databricks Mosaic AI with MLflow-managed model lifecycle and a 90/10 champion/challenger A/B deployment on Databricks serving endpoints.</p>
+        <div class="project-highlight">
+          <div class="highlight-item">
+            <span class="highlight-label">Impact</span>
+            <span>25% improvement in data linkage accuracy; eliminated manual preparation cycles entirely</span>
+          </div>
+          <div class="highlight-item">
+            <span class="highlight-label">Architecture</span>
+            <span>Multi-agent orchestration (LangChain) + RAG (Vector Search) + MLflow A/B serving</span>
+          </div>
+        </div>
+        <div class="project-tags">
+          <span>LangChain</span><span>Databricks Mosaic AI</span>
+          <span>MLflow</span><span>Delta Lake</span><span>RAG</span>
+          <span>FastAPI</span><span>Unity Catalog</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION & CERTS -->
+<section id="education">
+  <div class="container">
+    <p class="section-label">// education &amp; certifications</p>
+    <h2 class="section-title">Credentials</h2>
+    <div class="edu-grid">
+
+      <div class="edu-card" data-aos>
+        <div class="edu-icon-wrap">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A59.905 59.905 0 0112 3.493a59.902 59.902 0 0110.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.697 50.697 0 0112 13.489a50.702 50.702 0 017.74-3.342M6.75 15a.75.75 0 100-1.5.75.75 0 000 1.5zm0 0v-3.675A55.378 55.378 0 0112 8.443m-7.007 11.55A5.981 5.981 0 006.75 15.75v-1.5"/></svg>
+        </div>
+        <div class="edu-content">
+          <h3>MS in Business Analytics</h3>
+          <p class="edu-school">University of Illinois Chicago</p>
+          <p class="edu-meta">Jan 2021 – May 2022</p>
+          <p class="edu-detail">GPA: <strong>3.9 / 4.0</strong> &nbsp;·&nbsp; Chicago, IL</p>
+        </div>
+      </div>
+
+      <div class="cert-card highlight-cert" data-aos>
+        <img src="https://img.shields.io/badge/Databricks-FF3621?style=flat-square&logo=databricks&logoColor=white" alt="Databricks" class="cert-logo" />
+        <div class="cert-content">
+          <h3>Databricks Certified<br/>Generative AI Engineer Associate</h3>
+          <p class="cert-issuer">Databricks</p>
+          <p class="cert-level">Agentic AI &nbsp;·&nbsp; RAG &nbsp;·&nbsp; LLMOps &nbsp;·&nbsp; Mosaic AI</p>
+        </div>
+      </div>
+
+      <div class="cert-card" data-aos>
+        <img src="https://img.shields.io/badge/Databricks-FF3621?style=flat-square&logo=databricks&logoColor=white" alt="Databricks" class="cert-logo" />
+        <div class="cert-content">
+          <h3>Databricks Certified<br/>Data Engineer Associate</h3>
+          <p class="cert-issuer">Databricks</p>
+          <p class="cert-level">Delta Lake &nbsp;·&nbsp; Spark &nbsp;·&nbsp; Lakehouse</p>
+        </div>
+      </div>
+
+      <div class="cert-card" data-aos>
+        <img src="https://img.shields.io/badge/AWS-FF9900?style=flat-square&logo=amazonaws&logoColor=white" alt="AWS" class="cert-logo" />
+        <div class="cert-content">
+          <h3>AWS Certified<br/>Data Engineer Associate</h3>
+          <p class="cert-issuer">Amazon Web Services</p>
+          <p class="cert-level">S3 &nbsp;·&nbsp; Redshift &nbsp;·&nbsp; Glue &nbsp;·&nbsp; EMR &nbsp;·&nbsp; Kinesis</p>
+        </div>
+      </div>
+
+      <div class="cert-card" data-aos>
+        <img src="https://img.shields.io/badge/Tableau-E97627?style=flat-square&logo=tableau&logoColor=white" alt="Tableau" class="cert-logo" />
+        <div class="cert-content">
+          <h3>Tableau Desktop Specialist</h3>
+          <p class="cert-issuer">Tableau / Salesforce</p>
+          <p class="cert-level">Data Visualization &nbsp;·&nbsp; Dashboard Design</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="container">
+    <p class="section-label">// contact</p>
+    <h2 class="section-title">Let's Connect</h2>
+    <p class="contact-sub">Open to Senior AI Engineer, Staff Data Engineer, and AI Platform Lead roles. Remote-ready. Happy to talk architecture, AI system design, or dbt at any depth.</p>
+    <div class="contact-grid">
+      <a href="mailto:Shashanksidhanth@gmail.com" class="contact-card" data-aos>
+        <div class="contact-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"/></svg>
+        </div>
+        <div class="contact-info">
+          <p class="contact-label">Email</p>
+          <p>Shashanksidhanth@gmail.com</p>
+        </div>
+      </a>
+      <a href="https://www.linkedin.com/in/shashank-siddagangaiah" target="_blank" rel="noopener" class="contact-card" data-aos>
+        <div class="contact-icon">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        </div>
+        <div class="contact-info">
+          <p class="contact-label">LinkedIn</p>
+          <p>shashank-siddagangaiah</p>
+        </div>
+      </a>
+      <a href="https://github.com/Shashank-Siddagangaiah" target="_blank" rel="noopener" class="contact-card" data-aos>
+        <div class="contact-icon">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+        </div>
+        <div class="contact-info">
+          <p class="contact-label">GitHub</p>
+          <p>Shashank-Siddagangaiah</p>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>Designed &amp; built by <strong>Shashank Siddagangaiah</strong> &nbsp;·&nbsp; 2025</p>
+  <p class="footer-sub">Lead AI &amp; Data Engineer &nbsp;·&nbsp; Chicago, IL &nbsp;·&nbsp; Open to Remote</p>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
