@@ -416,7 +416,7 @@
 <!-- PROJECTS -->
 <section id="projects">
   <div class="container">
-    <p class="section-label">// portfolio project</p>
+    <p class="section-label">// portfolio projects</p>
     <h2 class="section-title">What I'm Building</h2>
     <div class="projects-grid">
 
@@ -432,7 +432,7 @@
           </div>
         </div>
         <h3>EvoFit — AI-Powered Fitness Platform</h3>
-        <p>Production fitness platform — gym workout logging, sport analytics, yoga session management, habit tracking, and leaderboard. React 18 / TypeScript frontend on a Supabase PostgreSQL backend with Row-Level Security. dbt model layer (staging → intermediate → mart) serves as the clean data contract between the analytics layer and AI agents.</p>
+        <p>Production fitness platform — gym workout logging, sport analytics, yoga session management, habit tracking, and leaderboard. React 19 / TypeScript frontend on a Supabase PostgreSQL backend with Row-Level Security. dbt model layer (staging → intermediate → mart) serves as the clean data contract between the analytics layer and AI agents.</p>
         <div class="project-highlight">
           <div class="highlight-item">
             <span class="highlight-label">App — Live</span>
@@ -448,7 +448,7 @@
           </div>
         </div>
         <div class="project-tags">
-          <span>React 18</span><span>TypeScript</span><span>Supabase</span>
+          <span>React 19</span><span>TypeScript</span><span>Supabase</span>
           <span>dbt Core</span><span>pgvector</span><span>LlamaIndex</span>
           <span>Ragas</span><span>Anthropic Claude SDK</span><span>PostHog</span><span>Vite</span>
         </div>
@@ -460,6 +460,89 @@
           <a href="https://github.com/Shashank-Siddagangaiah" target="_blank" rel="noopener" class="project-link">
             <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
             GitHub
+          </a>
+        </div>
+      </div>
+
+      <!-- JAGANNATHA HORA -->
+      <div class="project-card" data-aos>
+        <div class="project-header">
+          <div class="project-icon-wrap">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.563.563 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z"/></svg>
+          </div>
+          <div class="project-badges">
+            <span class="badge-live">Live</span>
+            <span class="badge-featured">Founder</span>
+          </div>
+        </div>
+        <h3>Jagannatha Hora — AI Vedic Astrology Platform</h3>
+        <p>Full-stack Vedic astrology platform combining classical astrological computation with a modern multi-agent AI system, serving thousands of users with personalized predictions. A custom MCP server exposes 11 live astrological tools — every AI answer is grounded in actual computed chart data via Swiss Ephemeris, not generic text.</p>
+        <div class="project-highlight">
+          <div class="highlight-item">
+            <span class="highlight-label">Multi-Agent AI</span>
+            <span>GPT-4o triage agent routes to 3 specialist agents (Career, Marriage, General) — each with RAG via custom OpenAI Vector Stores + live MCP tool calls during inference</span>
+          </div>
+          <div class="highlight-item">
+            <span class="highlight-label">Custom MCP Server</span>
+            <span>Spring Boot (Java 11) — 11 tools: horoscope generation, Vimshottari Dasha, planetary transits, Sade Sati, compatibility analysis; engine powered by Swiss Ephemeris</span>
+          </div>
+          <div class="highlight-item">
+            <span class="highlight-label">Voice Interface</span>
+            <span>Push-to-talk via OpenAI Whisper, routed through the same multi-agent pipeline; backend on FastAPI + GCP Cloud Run + MongoDB</span>
+          </div>
+        </div>
+        <div class="project-tags">
+          <span>React</span><span>TypeScript</span><span>FastAPI</span>
+          <span>OpenAI GPT-4o</span><span>Agents SDK</span><span>RAG</span>
+          <span>MCP</span><span>Spring Boot</span><span>Swiss Ephemeris</span>
+          <span>MongoDB</span><span>Docker</span><span>GCP Cloud Run</span>
+          <span>Firebase</span><span>Razorpay</span>
+        </div>
+        <div class="project-footer">
+          <a href="https://jagannathahora.com" target="_blank" rel="noopener" class="project-link">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"/></svg>
+            View Live App
+          </a>
+        </div>
+      </div>
+
+      <!-- HOROSCOPES TODAY -->
+      <div class="project-card" data-aos>
+        <div class="project-header">
+          <div class="project-icon-wrap">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 18.75a6 6 0 006-6v-1.5m-6 7.5a6 6 0 01-6-6v-1.5m6 7.5v3.75m-3.75 0h7.5M12 15.75a3 3 0 01-3-3V4.5a3 3 0 116 0v8.25a3 3 0 01-3 3z"/></svg>
+          </div>
+          <div class="project-badges">
+            <span class="badge-live">Live</span>
+            <span class="badge-featured">Founder</span>
+          </div>
+        </div>
+        <h3>Horoscopes Today — AI Voice Astrologer</h3>
+        <p>Live AI voice astrology platform where users receive a real-time spoken Vedic reading — fully conversational, not pre-recorded. An ElevenLabs voice agent backed by Claude Sonnet calls the Kundli Generator MCP server mid-conversation to compute chart data on the fly, then speaks results naturally in 81 languages. Freemium with Razorpay credit packs.</p>
+        <div class="project-highlight">
+          <div class="highlight-item">
+            <span class="highlight-label">Voice Agent</span>
+            <span>ElevenLabs conversational agent + Claude Sonnet — real-time MCP tool calls during live voice sessions for horoscopes, Dasha periods, and transit data; 81-language support</span>
+          </div>
+          <div class="highlight-item">
+            <span class="highlight-label">Monetisation</span>
+            <span>Freemium — 1 free session, credit packs via Razorpay; credits stored in Firestore and activated on demand</span>
+          </div>
+          <div class="highlight-item">
+            <span class="highlight-label">Infrastructure</span>
+            <span>Firebase Hosting + Cloud Functions; fire-and-forget batched Firestore writes keep voice latency unblocked by DB operations</span>
+          </div>
+        </div>
+        <div class="project-tags">
+          <span>React</span><span>TypeScript</span><span>Vite</span>
+          <span>ElevenLabs</span><span>Claude Sonnet</span><span>MCP</span>
+          <span>Firebase</span><span>Cloud Functions</span><span>Firestore</span>
+          <span>Razorpay</span><span>81 Languages</span>
+        </div>
+        <div class="project-footer">
+          <a href="https://horoscopes.today" target="_blank" rel="noopener" class="project-link">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"/></svg>
+            View Live App
           </a>
         </div>
       </div>
