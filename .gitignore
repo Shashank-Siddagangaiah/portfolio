@@ -30,3 +30,9 @@ __pycache__/
 calude_token/
 *.xlsx
 *.csv
+
+# Local-only folders (not for GitHub)
+Client_Work/
+Personal/
+node_modules/
+test-results/
